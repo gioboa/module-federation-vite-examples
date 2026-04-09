@@ -1,5 +1,6 @@
 import { LitElement, css, html } from "lit";
 import { property, state } from "lit/decorators.js";
+import { classMap } from "lit/directives/class-map.js";
 
 export class RemoteCounter extends LitElement {
   @property({ type: String })
@@ -9,8 +10,10 @@ export class RemoteCounter extends LitElement {
   private count = 0;
 
   render() {
+    const classes = { counter: true };
+
     return html`
-      <button class="counter" type="button" @click=${this.increment}>
+      <button class=${classMap(classes)} type="button" @click=${this.increment}>
         ${this.label}: ${this.count}
       </button>
     `;
