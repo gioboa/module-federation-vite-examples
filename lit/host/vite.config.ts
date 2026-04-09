@@ -22,6 +22,7 @@ export default defineConfig(() => ({
       filename: "remoteEntry.js",
       shared: {
         lit: { singleton: true },
+        "lit-html": { singleton: true },
       },
     }),
   ],

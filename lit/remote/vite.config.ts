@@ -17,6 +17,7 @@ export default defineConfig(() => {
         remotes: {},
         shared: {
           lit: { singleton: true },
+          "lit-html": { singleton: true },
         },
       }),
     ],
