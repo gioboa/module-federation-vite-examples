@@ -1,5 +1,6 @@
 import { federation } from "@module-federation/vite";
 import { defineConfig } from "vite";
+import { dependencies } from "./package.json";
 
 export default defineConfig(() => {
   return {
@@ -16,7 +17,7 @@ export default defineConfig(() => {
         },
         remotes: {},
         shared: {
-          lit: { singleton: true },
+          lit: { requiredVersion: dependencies.lit, singleton: true },
           "lit-html": { singleton: true },
         },
       }),
