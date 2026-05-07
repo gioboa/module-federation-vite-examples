@@ -4,4 +4,4 @@ packages:
   - "tanstack-ssr/{host,remote,shared}"
 
 catalog:
-  "@module-federation/vite": "https://pkg.pr.new/@module-federation/vite@8020eec"
+  "@module-federation/vite": "https://pkg.pr.new/@module-federation/vite@4ad3a9a"
