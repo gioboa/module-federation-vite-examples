@@ -1,0 +1,9 @@
+{
+  "name": "tanstack-ssr",
+  "description": "Module Federation Vite + TanStack Start with full SSR support",
+  "scripts": {
+    "dev": "pnpm --filter tanstack-ssr-shared build && pnpm --filter tanstack-ssr-remote dev & pnpm --filter tanstack-ssr-host dev",
+    "build": "pnpm --filter tanstack-ssr-shared build && pnpm --filter tanstack-ssr-remote build && pnpm --filter tanstack-ssr-host build",
+    "preview": "pnpm --filter tanstack-ssr-remote preview & pnpm --filter tanstack-ssr-host start"
+  }
+}

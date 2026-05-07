@@ -1,6 +1,7 @@
 packages:
-  - "{alpine,angular,lit,nuxt,preact,react,solid,svelte,tanstack,vinext,vue}"
+  - "{alpine,angular,lit,nuxt,preact,react,solid,svelte,tanstack,tanstack-ssr,vinext,vue}"
   - "{alpine,angular,lit,nuxt,preact,react,solid,svelte,tanstack,vinext,vue}/*"
+  - "tanstack-ssr/{host,remote,shared}"
 
 catalog:
-  "@module-federation/vite": "https://pkg.pr.new/@module-federation/vite@689"
+  "@module-federation/vite": "https://pkg.pr.new/@module-federation/vite@692"

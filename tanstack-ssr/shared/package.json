@@ -1,0 +1,17 @@
+{
+  "name": "tanstack-ssr-shared",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./dist/shared.js",
+  "module": "./dist/shared.js",
+  "types": "./shared.ts",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "^0.25.0"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0"
+  }
+}
