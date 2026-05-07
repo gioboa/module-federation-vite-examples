@@ -19,7 +19,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        framework: [alpine, angular, lit, nuxt, preact, react, solid, svelte, tanstack, vinext, vue]
+        framework: [alpine, angular, lit, nuxt, preact, react, solid, svelte, tanstack, tanstack-ssr, vinext, vue]
     steps:
       - uses: actions/checkout@v6
       - uses: pnpm/action-setup@v4
@@ -44,14 +44,14 @@ jobs:
         run: pnpm install --no-frozen-lockfile --prefer-offline
 
       - name: Test vite 7
-        if: matrix.framework != 'nuxt' && matrix.framework != 'tanstack' && matrix.framework != 'react'
+        if: matrix.framework != 'nuxt' && matrix.framework != 'tanstack' && matrix.framework != 'tanstack-ssr' && matrix.framework != 'react'
         uses: ./.github/actions/test-vite
         with:
           vite-version: "7"
           framework: ${{ matrix.framework }}
 
       - name: Test vite 8
-        if: matrix.framework != 'angular'
+        if: matrix.framework != 'angular' && matrix.framework != 'tanstack-ssr' && matrix.framework != 'nuxt'
         uses: ./.github/actions/test-vite
         with:
           vite-version: "8"
@@ -62,3 +62,25 @@ jobs:
         uses: ./.github/actions/test-vite
         with:
           framework: nuxt
+
+      - name: Test tanstack-ssr (build)
+        if: matrix.framework == 'tanstack-ssr'
+        run: pnpm tanstack-ssr:build
+
+      - name: Test tanstack-ssr (preview)
+        id: test-tanstack-ssr-preview
+        if: matrix.framework == 'tanstack-ssr'
+        run: pnpm exec playwright test e2e/tanstack-start-ssr.spec.ts
+        env:
+          PLAYWRIGHT_TEST_COMMAND: pnpm tanstack-ssr:preview
+          PLAYWRIGHT_REPORT_DIR: artifacts/playwright/tanstack-ssr/preview/report
+          PLAYWRIGHT_TEST_RESULTS_DIR: artifacts/playwright/tanstack-ssr/preview/test-results
+
+      - name: Upload tanstack-ssr test artifacts
+        if: failure() && steps.test-tanstack-ssr-preview.outcome == 'failure'
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-tanstack-ssr-preview
+          path: artifacts/playwright/tanstack-ssr/preview
+          if-no-files-found: ignore
+          retention-days: 7
