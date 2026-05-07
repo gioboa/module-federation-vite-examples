@@ -36,10 +36,10 @@ test("remote counter should be interactive after hydration", async ({ page }) =>
   await expect(page.getByRole("button", { name: /Remote counter: 1/ }).first()).toBeVisible();
 });
 
-test("host ThemeContext should be consumed by remote components", async ({ page }) => {
+test("shared context singleton should cross the MF boundary", async ({ page }) => {
   await page.goto("/");
 
-  // Both remote components display the theme label provided by the host.
+  // Remote components display the theme label provided by the host.
   // If the React singleton is not shared, they'd show 'default' instead.
   await expect(page.getByText(/Theme from host context:/).first()).toBeVisible({ timeout: 10000 });
   const themeLabels = page.getByText("host");
@@ -49,6 +49,6 @@ test("host ThemeContext should be consumed by remote components", async ({ page 
 test("hydration badge should update after client-side hydration", async ({ page }) => {
   await page.goto("/");
 
-  // Wait for hydration to complete — badge transitions from 'ssr' to 'hydrated'
+  // Badge transitions from 'ssr' (server-rendered) to 'hydrated' once JS loads.
   await expect(page.getByText("hydrated").first()).toBeVisible({ timeout: 10000 });
 });

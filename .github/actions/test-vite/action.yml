@@ -9,6 +9,10 @@ inputs:
   framework:
     description: Framework to test (e.g. "react", "vue")
     required: true
+  spec:
+    description: Playwright spec file to run. If empty, runs all specs.
+    required: false
+    default: ""
 
 runs:
   using: composite
@@ -33,7 +37,7 @@ runs:
       id: test-dev
       if: inputs.framework != 'nuxt'
       shell: bash
-      run: pnpm exec playwright test
+      run: pnpm exec playwright test ${{ inputs.spec }}
       env:
         PLAYWRIGHT_TEST_COMMAND: pnpm ${{ inputs.framework }}:dev
         PLAYWRIGHT_REPORT_DIR: artifacts/playwright/${{ inputs.framework }}/vite-${{ steps.report-labels.outputs.vite-label }}/dev/report
@@ -56,7 +60,7 @@ runs:
       id: test-preview
       if: inputs.framework != 'svelte'
       shell: bash
-      run: pnpm exec playwright test
+      run: pnpm exec playwright test ${{ inputs.spec }}
       env:
         PLAYWRIGHT_TEST_COMMAND: pnpm ${{ inputs.framework }}:preview
         PLAYWRIGHT_REPORT_DIR: artifacts/playwright/${{ inputs.framework }}/vite-${{ steps.report-labels.outputs.vite-label }}/preview/report
