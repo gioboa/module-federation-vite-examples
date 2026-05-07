@@ -54,7 +54,7 @@ export default defineConfig({
         remote: {
           type: "module",
           name: "remote",
-          entry: "http://localhost:5174/remoteEntry.js",
+          entry: "http://localhost:4175/remoteEntry.js",
         },
       },
       shared: {
@@ -76,6 +76,6 @@ export default defineConfig({
     target: "chrome89",
   },
   server: {
-    port: 3000,
+    port: 4173,
   },
 });
