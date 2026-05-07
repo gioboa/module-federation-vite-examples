@@ -37,3 +37,4 @@ tanstack-ssr/**/.output
 tanstack-ssr/**/.tanstack
 tanstack-ssr/**/.mf
 tanstack-ssr/**/dist
+tanstack-ssr/**/node_modules/.ssr-cache
