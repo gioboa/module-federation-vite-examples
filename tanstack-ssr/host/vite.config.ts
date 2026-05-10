@@ -3,33 +3,6 @@ import { tanstackStart } from "@tanstack/react-start/plugin/vite";
 import react from "@vitejs/plugin-react";
 import { federation } from "@module-federation/vite";
 import { nitro } from "nitro/vite";
-import type { Plugin } from "vite";
-
-// TanStack Start's bundle scanner assumes exactly one isEntry chunk.
-// MF emits additional entry chunks (hostInit, remoteEntry, virtualExposes)
-// that are not the real app entry. Mark them as non-entry so the scanner
-// skips them. This is built into @module-federation/vite PR #692 and can
-// be removed once that fix lands in a published release.
-function mfNormalizeEntryChunks(): Plugin {
-  return {
-    name: "mf:normalize-entry-chunks",
-    enforce: "pre",
-    apply: "build",
-    generateBundle(_options, bundle) {
-      for (const chunk of Object.values(bundle)) {
-        if (chunk.type !== "chunk" || !chunk.isEntry) continue;
-        const facadeId = chunk.facadeModuleId ?? "";
-        if (
-          facadeId.includes("__mf__virtual") ||
-          facadeId.startsWith("virtual:mf-") ||
-          facadeId.startsWith("\0virtual:mf-")
-        ) {
-          (chunk as { isEntry: boolean }).isEntry = false;
-        }
-      }
-    },
-  };
-}
 
 export default defineConfig({
   nitro: {
@@ -46,7 +19,6 @@ export default defineConfig({
     ],
   },
   plugins: [
-    mfNormalizeEntryChunks(),
     federation({
       name: "host",
       hostInitInjectLocation: "entry",
