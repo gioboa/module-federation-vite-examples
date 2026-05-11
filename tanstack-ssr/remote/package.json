@@ -2,9 +2,9 @@
   "name": "tanstack-ssr-remote",
   "type": "module",
   "scripts": {
-    "dev": "vite --port 5174",
+    "dev": "vite --port 4175",
     "build": "vite build",
-    "preview": "vite preview --port 5174"
+    "preview": "vite preview --port 4175"
   },
   "dependencies": {
     "react": "^19.0.0",

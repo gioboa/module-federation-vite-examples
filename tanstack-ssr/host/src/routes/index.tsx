@@ -5,7 +5,12 @@ import type { ReactNode } from "react";
 const RemoteWidget = lazy(() => import("remote/Widget"));
 const RemoteCounter = lazy(() => import("remote/Counter"));
 
+// Pre-load remote modules before render so the MF runtime resolves them
+// server-side via ssrEntryLoader. Without this, React.lazy returns the
+// dev proxy synchronously — the module is null during SSR and renders nothing.
 export const Route = createFileRoute("/")({
+  loader: () =>
+    Promise.all([import("remote/Widget"), import("remote/Counter")]).then(() => null),
   component: IndexPage,
 });
 
