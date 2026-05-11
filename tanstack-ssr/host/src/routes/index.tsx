@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { lazy, Suspense, Component } from "react";
+import { lazy, Suspense, Component, useState } from "react";
 import type { ReactNode } from "react";
 
 const RemoteWidget = lazy(() => import("remote/Widget"));
@@ -47,6 +47,28 @@ class RemoteErrorBoundary extends Component<
   }
 }
 
+function HostCounter() {
+  const [count, setCount] = useState(0);
+  return (
+    <div
+      style={{
+        border: "2px solid #3451b2",
+        borderRadius: 8,
+        padding: 24,
+        maxWidth: 320,
+      }}
+    >
+      <h2 style={{ margin: "0 0 8px", color: "#3451b2" }}>Host counter</h2>
+      <button
+        style={{ padding: "8px 16px", cursor: "pointer" }}
+        onClick={() => setCount((c) => c + 1)}
+      >
+        Host counter: {count}
+      </button>
+    </div>
+  );
+}
+
 function IndexPage() {
   return (
     <main style={{ fontFamily: "sans-serif", padding: 32 }}>
@@ -59,6 +81,8 @@ function IndexPage() {
       </p>
 
       <div style={{ display: "flex", gap: 24, flexWrap: "wrap" }}>
+        <HostCounter />
+
         <RemoteErrorBoundary name="Widget">
           <Suspense fallback={<div>Loading remote widget...</div>}>
             <RemoteWidget />

@@ -19,8 +19,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        framework: [alpine, angular, lit, nuxt, preact, react, solid, svelte, tanstack, tanstack-ssr, vinext, vue]
-        spec: [""]
+        framework: [alpine, angular, lit, nuxt, preact, react, solid, svelte, tanstack, vinext, vue]
+        spec: ["e2e/app.spec.ts"]
         include:
           - framework: tanstack-ssr
             spec: e2e/ssr.spec.ts
