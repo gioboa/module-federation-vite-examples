@@ -23,12 +23,12 @@ export default defineConfig({
     target: "chrome89",
   },
   server: {
-    port: 4175,
+    port: 4174,
     cors: true,
-    origin: "http://localhost:4175",
+    origin: "http://localhost:4174",
   },
   preview: {
-    port: 4175,
+    port: 4174,
     cors: true,
   },
 });

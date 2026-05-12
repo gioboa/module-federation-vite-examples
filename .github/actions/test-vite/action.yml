@@ -13,6 +13,10 @@ inputs:
     description: Playwright spec file to run. If empty, runs all specs.
     required: false
     default: ""
+  webserver-url:
+    description: URL Playwright polls to confirm the web server is ready. Defaults to http://localhost:4173.
+    required: false
+    default: "http://localhost:4173"
 
 runs:
   using: composite
@@ -40,6 +44,7 @@ runs:
       run: pnpm exec playwright test ${{ inputs.spec }}
       env:
         PLAYWRIGHT_TEST_COMMAND: pnpm ${{ inputs.framework }}:dev
+        PLAYWRIGHT_WEBSERVER_URL: ${{ inputs.webserver-url }}
         PLAYWRIGHT_REPORT_DIR: artifacts/playwright/${{ inputs.framework }}/vite-${{ steps.report-labels.outputs.vite-label }}/dev/report
         PLAYWRIGHT_TEST_RESULTS_DIR: artifacts/playwright/${{ inputs.framework }}/vite-${{ steps.report-labels.outputs.vite-label }}/dev/test-results
 
@@ -63,6 +68,7 @@ runs:
       run: pnpm exec playwright test ${{ inputs.spec }}
       env:
         PLAYWRIGHT_TEST_COMMAND: pnpm ${{ inputs.framework }}:preview
+        PLAYWRIGHT_WEBSERVER_URL: ${{ inputs.webserver-url }}
         PLAYWRIGHT_REPORT_DIR: artifacts/playwright/${{ inputs.framework }}/vite-${{ steps.report-labels.outputs.vite-label }}/preview/report
         PLAYWRIGHT_TEST_RESULTS_DIR: artifacts/playwright/${{ inputs.framework }}/vite-${{ steps.report-labels.outputs.vite-label }}/preview/test-results
 

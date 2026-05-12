@@ -31,11 +31,18 @@ test("remote counter should be interactive after hydration", async ({ page }) =>
 
   // Wait for the hydration badge span (not the <code> in the description text)
   // to ensure React has attached event handlers before clicking.
-  await expect(page.locator("span", { hasText: "hydrated" }).first()).toBeVisible({ timeout: 10000 });
+  await expect(page.locator("span", { hasText: "hydrated" }).first()).toBeVisible({
+    timeout: 10000,
+  });
 
   // Re-resolve locator after hydration to avoid stale element references.
-  await page.getByRole("button", { name: /Remote counter: 0/ }).first().click();
-  await expect(page.getByRole("button", { name: /Remote counter: 1/ }).first()).toBeVisible({ timeout: 10000 });
+  await page
+    .getByRole("button", { name: /Remote counter: 0/ })
+    .first()
+    .click();
+  await expect(page.getByRole("button", { name: /Remote counter: 1/ }).first()).toBeVisible({
+    timeout: 10000,
+  });
 });
 
 test("shared context singleton should cross the MF boundary", async ({ page }) => {

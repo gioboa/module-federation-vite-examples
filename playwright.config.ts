@@ -19,7 +19,8 @@ export default defineConfig({
   ],
   webServer: {
     command: process.env.PLAYWRIGHT_TEST_COMMAND || "pnpm react:preview",
-    url: "http://localhost:4173",
+    url: process.env.PLAYWRIGHT_WEBSERVER_URL || "http://localhost:4173",
     reuseExistingServer: !process.env.CI,
+    timeout: 120000,
   },
 });

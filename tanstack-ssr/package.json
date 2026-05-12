@@ -4,6 +4,6 @@
   "scripts": {
     "dev": "pnpm --filter tanstack-ssr-shared build && pnpm --filter tanstack-ssr-remote dev & pnpm --filter tanstack-ssr-host dev",
     "build": "pnpm --filter tanstack-ssr-shared build && pnpm --filter tanstack-ssr-remote build && pnpm --filter tanstack-ssr-host build",
-    "preview": "pnpm --filter tanstack-ssr-remote preview & sleep 5 && PORT=4173 pnpm --filter tanstack-ssr-host start"
+    "preview": "pnpm --filter tanstack-ssr-* preview"
   }
 }

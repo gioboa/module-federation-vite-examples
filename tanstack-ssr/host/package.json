@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
+    "preview": "PORT=4173 node .output/server/index.mjs",
     "start": "node .output/server/index.mjs"
   },
   "dependencies": {
