@@ -29,11 +29,13 @@ test("host app and remote components should be server-rendered", async ({ page }
 test("remote counter should be interactive after hydration", async ({ page }) => {
   await page.goto("/");
 
-  const counter = page.getByRole("button", { name: /Remote counter: 0/ }).first();
-  await expect(counter).toBeVisible({ timeout: 10000 });
+  // Wait for the hydration badge span (not the <code> in the description text)
+  // to ensure React has attached event handlers before clicking.
+  await expect(page.locator("span", { hasText: "hydrated" }).first()).toBeVisible({ timeout: 10000 });
 
-  await counter.click();
-  await expect(page.getByRole("button", { name: /Remote counter: 1/ }).first()).toBeVisible();
+  // Re-resolve locator after hydration to avoid stale element references.
+  await page.getByRole("button", { name: /Remote counter: 0/ }).first().click();
+  await expect(page.getByRole("button", { name: /Remote counter: 1/ }).first()).toBeVisible({ timeout: 10000 });
 });
 
 test("shared context singleton should cross the MF boundary", async ({ page }) => {

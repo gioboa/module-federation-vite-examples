@@ -26,12 +26,16 @@ export default function Widget() {
       <p style={{ margin: "0 0 16px", fontSize: 12, color: "#999" }}>
         Theme from host context: <strong>{theme.label}</strong> ({theme.primaryColour})
       </p>
-      <button
-        onClick={() => setCount((c) => c + 1)}
-        style={{ padding: "8px 16px", cursor: "pointer", display: "block", marginBottom: 8 }}
-      >
-        Remote counter: {count}
-      </button>
+      {/* Render button only after hydration so event handlers are attached
+          before Playwright (or any test) can click it. */}
+      {hydrated && (
+        <button
+          onClick={() => setCount((c) => c + 1)}
+          style={{ padding: "8px 16px", cursor: "pointer", display: "block", marginBottom: 8 }}
+        >
+          Remote counter: {count}
+        </button>
+      )}
       <span
         style={{
           display: "inline-block",

@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { lazy, Suspense, Component, useState } from "react";
+import React, { lazy, Suspense, Component, useState } from "react";
 import type { ReactNode } from "react";
 
 const RemoteWidget = lazy(() => import("remote/Widget"));
@@ -49,6 +49,12 @@ class RemoteErrorBoundary extends Component<
 
 function HostCounter() {
   const [count, setCount] = useState(0);
+  const [mounted, setMounted] = useState(false);
+  // Defer rendering until after React hydration so Playwright finds the
+  // button only once event handlers are attached (clicking SSR-rendered
+  // buttons before hydration silently drops the event).
+  React.useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
   return (
     <div
       style={{
