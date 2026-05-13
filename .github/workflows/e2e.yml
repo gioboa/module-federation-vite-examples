@@ -71,3 +71,4 @@ jobs:
         uses: ./.github/actions/test-vite
         with:
           framework: nuxt
+          spec: ${{ matrix.spec }}
