@@ -2,8 +2,8 @@
   "name": "tanstack",
   "description": "Module Federation Vite + TanStack is now possible",
   "scripts": {
-    "dev": "pnpm --filter tanstack-* dev",
-    "build": "pnpm --filter tanstack-* build",
-    "preview": "pnpm --filter tanstack-* preview"
+    "dev": "pnpm --filter tanstack-host --filter tanstack-remote dev",
+    "build": "pnpm --filter tanstack-host --filter tanstack-remote build",
+    "preview": "pnpm --filter tanstack-host --filter tanstack-remote preview"
   }
 }
