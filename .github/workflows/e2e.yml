@@ -58,7 +58,7 @@ jobs:
           webserver-url: ${{ matrix.webserver-url }}
 
       - name: Test vite 8
-        if: matrix.framework != 'angular' && matrix.framework != 'nuxt'
+        if: matrix.framework != 'angular'
         uses: ./.github/actions/test-vite
         with:
           vite-version: "8"
