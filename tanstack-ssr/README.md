@@ -11,7 +11,7 @@ pnpm build
 pnpm preview
 ```
 
-Open your browser at http://localhost:3000/
+Open your browser at http://localhost:4173/
 
 ## What this demonstrates
 

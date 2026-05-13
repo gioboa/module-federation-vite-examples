@@ -9,8 +9,7 @@ const RemoteCounter = lazy(() => import("remote/Counter"));
 // server-side via ssrEntryLoader. Without this, React.lazy returns the
 // dev proxy synchronously — the module is null during SSR and renders nothing.
 export const Route = createFileRoute("/")({
-  loader: () =>
-    Promise.all([import("remote/Widget"), import("remote/Counter")]).then(() => null),
+  loader: () => Promise.all([import("remote/Widget"), import("remote/Counter")]).then(() => null),
   component: IndexPage,
 });
 
