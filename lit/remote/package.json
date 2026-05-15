@@ -7,12 +7,12 @@
     "preview": "vite preview --port 4174"
   },
   "dependencies": {
-    "lit": "^3.3.2"
+    "lit": "3.3.2"
   },
   "devDependencies": {
     "@module-federation/vite": "catalog:",
-    "lit-html": "^3.3.2",
-    "typescript": "~5.9.3",
+    "lit-html": "3.3.2",
+    "typescript": "5.9.3",
     "vite": "7.3.2"
   }
 }

@@ -2,5 +2,14 @@ packages:
   - "{alpine,angular,lit,nuxt,preact,react,solid,svelte,tanstack,tanstack-ssr,vinext,vue}"
   - "{alpine,angular,lit,nuxt,preact,react,solid,svelte,tanstack,tanstack-ssr,vinext,vue}/*"
 
+allowBuilds:
+  "@parcel/watcher": true
+  esbuild: true
+  lmdb: true
+  msgpackr-extract: true
+  sharp: true
+  unrs-resolver: true
+  vue-demi: true
+
 catalog:
   "@module-federation/vite": "https://pkg.pr.new/@module-federation/vite@cfb86bd"

@@ -20,6 +20,7 @@
     "prepare": "husky install",
     "fmt": "oxfmt *",
     "fmt.check": "oxfmt --check *",
+    "deps:unpin": "node -e \"const { readdirSync, readFileSync, writeFileSync } = require('node:fs'); const { join } = require('node:path'); const walk = (dir) => { for (const entry of readdirSync(dir, { withFileTypes: true })) { if (entry.name === '.git' || entry.name === 'node_modules') continue; const path = join(dir, entry.name); if (entry.isDirectory()) walk(path); else if (entry.name === 'package.json') { const text = readFileSync(path, 'utf8'); const next = text.replace(/\\\": \\\"[\\^*~]/g, '\\\": \\\"'); if (next !== text) writeFileSync(path, next); } } }; walk(process.cwd());\"",
     "alpine:build": "pnpm -C alpine build",
     "alpine:dev": "pnpm -C alpine dev",
     "alpine:preview": "pnpm -C alpine preview",
@@ -58,8 +59,8 @@
     "vue:preview": "pnpm -C vue preview"
   },
   "devDependencies": {
-    "@playwright/test": "^1.58.2",
-    "husky": "^9.1.7",
-    "oxfmt": "^0.36.0"
+    "@playwright/test": "1.58.2",
+    "husky": "9.1.7",
+    "oxfmt": "0.36.0"
   }
 }

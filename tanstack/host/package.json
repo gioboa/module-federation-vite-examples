@@ -8,14 +8,14 @@
   },
   "dependencies": {
     "@tanstack/react-router": "1.166.8",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "rxjs": "^7.8.2"
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "rxjs": "7.8.2"
   },
   "devDependencies": {
     "@module-federation/vite": "catalog:",
-    "@tanstack/router-cli": "^1.166.7",
-    "@tanstack/router-plugin": "^1.166.8",
+    "@tanstack/router-cli": "1.166.7",
+    "@tanstack/router-plugin": "1.166.8",
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "@vitejs/plugin-react": "5.1.4",

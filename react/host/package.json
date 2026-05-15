@@ -8,9 +8,9 @@
   },
   "dependencies": {
     "@mf-vite-example/shared-ui": "workspace:*",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "rxjs": "^7.8.2"
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "rxjs": "7.8.2"
   },
   "devDependencies": {
     "@module-federation/vite": "catalog:",
