@@ -13,3 +13,6 @@ allowBuilds:
 
 catalog:
   "@module-federation/vite": "1.16.4"
+
+minimumReleaseAgeExclude:
+  - '@module-federation/vite@1.16.4'

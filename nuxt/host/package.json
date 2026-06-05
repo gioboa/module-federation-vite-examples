@@ -9,7 +9,7 @@
     "preview": "nuxt preview --port 4173"
   },
   "dependencies": {
-    "@module-federation/vite": "catalog:",
+    "@module-federation/nuxt": "workspace:",
     "@pinia/nuxt": "0.11.3",
     "nuxt": "4.3.1",
     "vue": "3.5.29",
