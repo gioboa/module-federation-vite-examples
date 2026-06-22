@@ -8,23 +8,24 @@ export default defineConfig({
     tailwindcss(),
     federation({
       dts: false,
-      dev: {
-        remoteHmr: true,
-      },
+      dev: { remoteHmr: true },
       name: "host",
+      hostInitInjectLocation: "html",
       remotes: {
         remote: {
           type: "module",
           name: "remote",
-          entry: "http://localhost:4174/remoteEntry.js",
+          entry: "http://localhost:4174/mf-manifest.json",
           entryGlobalName: "remote",
           shareScope: "default",
         },
       },
       exposes: {},
       filename: "remoteEntry.js",
-      shared: ["rxjs"],
     }),
     sveltekit(),
   ],
+  optimizeDeps: {
+    exclude: ["fsevents"],
+  },
 });

@@ -7,16 +7,29 @@ export default defineConfig({
   plugins: [
     tailwindcss(),
     federation({
-      dts: true,
+      dts: false,
       dev: { disableDynamicRemoteTypeHints: true, remoteHmr: true },
       filename: "remoteEntry.js",
+      manifest: true,
       name: "remote",
       exposes: {
-        "./remote-app": "./src/lib/mountApp.ts",
+        "./Widget": "./src/lib/mountWidget.ts",
+        "./Counter": "./src/lib/mountCounter.ts",
       },
       remotes: {},
-      shared: ["rxjs"],
     }),
     sveltekit(),
   ],
+  server: {
+    port: 4174,
+    cors: true,
+    origin: "http://localhost:4174",
+  },
+  preview: {
+    port: 4174,
+    cors: true,
+  },
+  optimizeDeps: {
+    exclude: ["fsevents"],
+  },
 });

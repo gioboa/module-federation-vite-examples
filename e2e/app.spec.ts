@@ -2,12 +2,14 @@ import { expect, test } from "@playwright/test";
 
 const isSharedState = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("vue");
 const isNuxt = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("nuxt");
+const isSvelteKit = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("svelte");
+const isSsrCardsExample = isNuxt || isSvelteKit;
 const isTanStack = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("tanstack");
 
 const btn = (page: any, name: RegExp) => page.getByRole("button", { name }).first();
 
 test.describe("standard examples", () => {
-  test.skip(isTanStack || isNuxt, "SSR examples have specific coverage");
+  test.skip(isTanStack || isSsrCardsExample, "SSR examples have specific coverage");
 
   test("host app and remote component should load and counters should work", async ({ page }) => {
     await page.goto("/");
@@ -65,8 +67,8 @@ test.describe("standard examples", () => {
   });
 });
 
-test.describe("nuxt", () => {
-  test.skip(!isNuxt, "nuxt only");
+test.describe("SSR card examples", () => {
+  test.skip(!isSsrCardsExample, "nuxt/sveltekit only");
 
   test("host app and remote components should load", async ({ page }) => {
     await page.goto("/");
