@@ -22,7 +22,7 @@
     "esbuild-plugin-vue-next": "0.1.4",
     "npm-run-all": "4.1.5",
     "typescript": "4.7.4",
-    "vite": "7.3.2",
+    "vite": "8.1.0",
     "vue-tsc": "1.0.12"
   }
 }

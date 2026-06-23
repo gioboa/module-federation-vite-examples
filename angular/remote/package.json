@@ -27,6 +27,6 @@
     "@angular/build": "21.2.5",
     "@angular/compiler-cli": "21.2.6",
     "typescript": "6.0.2",
-    "vite": "7.3.2"
+    "vite": "8.1.0"
   }
 }

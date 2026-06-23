@@ -12,7 +12,7 @@ allowBuilds:
   vue-demi: true
 
 catalog:
-  "@module-federation/vite": "https://pkg.pr.new/@module-federation/vite@845"
+  "@module-federation/vite": "1.16.10"
 
 minimumReleaseAgeExclude:
   - "@module-federation/dts-plugin@2.6.0"
