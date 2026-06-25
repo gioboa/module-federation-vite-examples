@@ -3,23 +3,17 @@ import { lazy, Suspense, useEffect } from "react";
 import { of, tap } from "rxjs";
 import "./App.css";
 import Counter from "./components/Counter";
+import { logRemoteImportDocs } from "./commentTrap";
 
 const Remote = lazy(
   // @ts-ignore
   async () => import("remote/remote-app")
 );
 
-// Example docs: import("remote/remote-app")
-/*
- * Block-comment example: import("remote/remote-app")
- */
-const remoteImportDocs = 'Dynamic remote example: import("remote/remote-app")';
-const remoteImportTemplateDocs = `Dynamic remote example: import("remote/remote-app")`;
-void remoteImportDocs;
-void remoteImportTemplateDocs;
-
 export default () => {
   useEffect(() => {
+    logRemoteImportDocs();
+
     of("emit")
       .pipe(tap(() => console.log("I'm RxJs from host")))
       .subscribe();
