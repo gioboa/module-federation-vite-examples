@@ -9,6 +9,15 @@ const Remote = lazy(
   async () => import("remote/remote-app")
 );
 
+// Example docs: import("remote/remote-app")
+/*
+ * Block-comment example: import("remote/remote-app")
+ */
+const remoteImportDocs = 'Dynamic remote example: import("remote/remote-app")';
+const remoteImportTemplateDocs = `Dynamic remote example: import("remote/remote-app")`;
+void remoteImportDocs;
+void remoteImportTemplateDocs;
+
 export default () => {
   useEffect(() => {
     of("emit")
