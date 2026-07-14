@@ -5,7 +5,9 @@ import { resolve } from "node:path";
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
-  devtools: { enabled: true },
+  // Only the host needs a DevTools bridge while both apps run together.
+  // Enabling it in both apps makes them compete for port 24678.
+  devtools: { enabled: false },
   modules: ["@pinia/nuxt"],
 
   experimental: {
@@ -32,7 +34,12 @@ export default defineNuxtConfig({
   },
 
   vite: {
-    server: { cors: true },
+    server: {
+      cors: true,
+      // The host runs alongside this app during development. Give the
+      // remote its own HMR socket instead of competing for Vite's default.
+      hmr: { port: 24679 },
+    },
     plugins: [
       federation({
         dts: false,

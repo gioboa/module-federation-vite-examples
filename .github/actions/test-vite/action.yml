@@ -31,7 +31,7 @@ runs:
 
     - name: Test dev
       id: test-dev
-      if: inputs.framework != 'nuxt' && inputs.framework != 'tanstack'
+      if: inputs.framework != 'nuxt'
       shell: bash
       run: pnpm exec playwright test
       env:
@@ -54,7 +54,6 @@ runs:
 
     - name: Test preview
       id: test-preview
-      if: inputs.framework != 'svelte' && inputs.framework != 'tanstack'
       shell: bash
       run: pnpm exec playwright test
       env:

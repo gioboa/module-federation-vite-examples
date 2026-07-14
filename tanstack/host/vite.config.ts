@@ -4,6 +4,8 @@ import react from "@vitejs/plugin-react";
 import { nitro } from "nitro/vite";
 import { defineConfig } from "vite";
 
+let buildExitTimer: ReturnType<typeof setTimeout> | undefined;
+
 export default defineConfig({
   nitro: {
     // Keep react/react-dom as Node externals in the Nitro SSR bundle so all
@@ -42,8 +44,12 @@ export default defineConfig({
     {
       name: "tanstack-build-exit",
       apply: "build",
-      closeBundle() {
-        setImmediate(() => process.exit(0));
+      // Nitro leaves a long-lived handle open during closeBundle. TanStack
+      // Start writes client, SSR, and Nitro outputs, so wait until writes have
+      // been quiet before exiting.
+      writeBundle() {
+        if (buildExitTimer) clearTimeout(buildExitTimer);
+        buildExitTimer = setTimeout(() => process.exit(0), 1000);
       },
     },
   ],

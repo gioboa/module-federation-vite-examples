@@ -8,7 +8,7 @@
     "start": "node .output/server/index.mjs"
   },
   "dependencies": {
-    "@module-federation/runtime": "2.4.0",
+    "@module-federation/runtime": "2.7.0",
     "@tanstack/react-router": "1.168.10",
     "@tanstack/react-start": "1.167.16",
     "@tanstack/start-plugin-core": "1.167.17",

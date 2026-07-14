@@ -506,8 +506,8 @@ importers:
   tanstack/host:
     dependencies:
       '@module-federation/runtime':
-        specifier: 2.4.0
-        version: 2.4.0(node-fetch@2.7.0)
+        specifier: 2.7.0
+        version: 2.7.0
       '@tanstack/react-router':
         specifier: 1.168.10
         version: 1.168.10(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -2076,34 +2076,17 @@ packages:
       vue-tsc:
         optional: true
 
-  '@module-federation/error-codes@2.4.0':
-    resolution: {integrity: sha512-ktCZtwOoiKR1URJyBt223OsOFAUvc13rICYif55mt7+DomtELlh5FicnEz6mPLBUwmNM9vyBMvkxOdp+fQ5oUg==}
-
   '@module-federation/error-codes@2.7.0':
     resolution: {integrity: sha512-syToF3H77IbBhJ7auGMCIb5ZDmJ5tvaqSeEvncJrOCq7JBT96F4UDlQDyNh6kCVznvYqqHsPeEMrfI9b5/Omlg==}
 
   '@module-federation/managers@2.7.0':
     resolution: {integrity: sha512-cWohiUvSrY6dIfhwsRABmEWfvJiAD5u/gxU7XRk7bx5nYPj7qn5gvYWJtvLNWzenluHZR6sib+03QMlyo+MYKQ==}
 
-  '@module-federation/runtime-core@2.4.0':
-    resolution: {integrity: sha512-0S8fDw28DXDW17lTQwq5vfJWe2lG0Lw3+w4vk3DVVImLwXXay+OGxLDxzWUfypWcMznfpnoAnFUMO3PtuXziuA==}
-
   '@module-federation/runtime-core@2.7.0':
     resolution: {integrity: sha512-5ROZLVIeV9YnWO2RwCwSHcy6sh48yclErO/2GZ2Xe8lFubPrFirgU8pbwBjZw+All0ZzN44BGS4ECRMVFzVcpg==}
 
-  '@module-federation/runtime@2.4.0':
-    resolution: {integrity: sha512-IrLAMwUuteRgFlEkg9jrn4bk8uC897FnXvfNmkKD8/qIoNtSd+32e5ouQn+PEYbX/RjRUB1TYveY6rYHpTPkyg==}
-
   '@module-federation/runtime@2.7.0':
     resolution: {integrity: sha512-UtLozKKNvhT0D1+F0MEWsAmddJ39ItKW15E22LVMAwXmYZRSnzIvJQ2Y6kQ4LwhWABsw/GRSpUDex5OfhpSQPw==}
-
-  '@module-federation/sdk@2.4.0':
-    resolution: {integrity: sha512-eZDdF5B69W9npuka0VL24FY7XDM+YAwwfkscSeWOSqv4/8Hm0xmcmSurlP6NIOrwbeogerRCtEcnx/TFXYjoow==}
-    peerDependencies:
-      node-fetch: ^2.7.0 || ^3.3.2
-    peerDependenciesMeta:
-      node-fetch:
-        optional: true
 
   '@module-federation/sdk@2.7.0':
     resolution: {integrity: sha512-piiLEjaIdjbNq8E11Di6vsfryhcdN/+sBCH6NjG7gSU2VHHoHEayZQWWL7VVdS6rVjexF9McLhPTSrl0adUU+A==}
@@ -2112,7 +2095,7 @@ packages:
     resolution: {integrity: sha512-hZJKkngQ4hwe0U+vrT3KOsU11qoHCQK0wB4x1bXoTgpTfV9j5NSuddOyRmwbvXpir9bDWh3xy7ghqsx3mFf3kA==}
 
   '@module-federation/vite@https://pkg.pr.new/@module-federation/vite@922':
-    resolution: {integrity: sha512-niDGAEE0QUb31Px/LrT5EdEInqKTABAl6j8RzeY2pfAG9+2n0zBcChpnYAcUyzYDZjGqfnDgdafAxMfF/jyo+g==, tarball: https://pkg.pr.new/@module-federation/vite@922}
+    resolution: {tarball: https://pkg.pr.new/@module-federation/vite@922}
     version: 1.17.1
     engines: {node: ^20.19.0 || >=22.12.0}
     peerDependencies:
@@ -10229,8 +10212,6 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@module-federation/error-codes@2.4.0': {}
-
   '@module-federation/error-codes@2.7.0': {}
 
   '@module-federation/managers@2.7.0':
@@ -10238,35 +10219,16 @@ snapshots:
       '@module-federation/sdk': 2.7.0
       empathic: 2.0.0
 
-  '@module-federation/runtime-core@2.4.0(node-fetch@2.7.0)':
-    dependencies:
-      '@module-federation/error-codes': 2.4.0
-      '@module-federation/sdk': 2.4.0(node-fetch@2.7.0)
-    transitivePeerDependencies:
-      - node-fetch
-
   '@module-federation/runtime-core@2.7.0':
     dependencies:
       '@module-federation/error-codes': 2.7.0
       '@module-federation/sdk': 2.7.0
-
-  '@module-federation/runtime@2.4.0(node-fetch@2.7.0)':
-    dependencies:
-      '@module-federation/error-codes': 2.4.0
-      '@module-federation/runtime-core': 2.4.0(node-fetch@2.7.0)
-      '@module-federation/sdk': 2.4.0(node-fetch@2.7.0)
-    transitivePeerDependencies:
-      - node-fetch
 
   '@module-federation/runtime@2.7.0':
     dependencies:
       '@module-federation/error-codes': 2.7.0
       '@module-federation/runtime-core': 2.7.0
       '@module-federation/sdk': 2.7.0
-
-  '@module-federation/sdk@2.4.0(node-fetch@2.7.0)':
-    optionalDependencies:
-      node-fetch: 2.7.0
 
   '@module-federation/sdk@2.7.0': {}
 
