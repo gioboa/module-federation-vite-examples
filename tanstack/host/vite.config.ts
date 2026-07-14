@@ -39,6 +39,13 @@ export default defineConfig({
     tanstackStart(),
     react(),
     nitro(),
+    {
+      name: "tanstack-build-exit",
+      apply: "build",
+      closeBundle() {
+        setImmediate(() => process.exit(0));
+      },
+    },
   ],
   ssr: {
     optimizeDeps: {
