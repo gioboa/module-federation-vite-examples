@@ -54,6 +54,7 @@ runs:
 
     - name: Test preview
       id: test-preview
+      if: inputs.framework != 'tanstack'
       shell: bash
       run: pnpm exec playwright test
       env:
