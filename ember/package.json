@@ -1,0 +1,10 @@
+{
+  "name": "ember",
+  "private": true,
+  "description": "Module Federation Vite + Ember is now possible",
+  "scripts": {
+    "dev": "pnpm --filter ember-* dev",
+    "build": "pnpm --filter ember-* build",
+    "preview": "pnpm --filter ember-* preview"
+  }
+}

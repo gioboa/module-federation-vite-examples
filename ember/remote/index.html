@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Ember Remote</title>
+    <link rel="icon" href="data:," />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <script type="module">
+      import Application from "#app/app";
+      import environment from "#config";
+
+      Application.create(environment.APP);
+    </script>
+  </body>
+</html>

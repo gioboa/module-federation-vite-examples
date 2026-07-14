@@ -1,0 +1,33 @@
+.remote-card {
+  background: #1f2124;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  margin: 20px;
+  width: 250px;
+  padding: 20px;
+  text-align: center;
+  color: white;
+  float: left;
+}
+
+.title {
+  margin-top: 10px;
+  font-size: 25px;
+}
+svg {
+  width: 100px;
+  height: 100px;
+}
+path {
+  fill: #f6b352;
+}
+button {
+  border: 0;
+  margin-top: 10px;
+  background: rgb(246, 179, 82);
+  border-radius: 0.25rem;
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  color: rgb(24, 24, 24);
+  cursor: pointer;
+}
