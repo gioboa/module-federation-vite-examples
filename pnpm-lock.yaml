@@ -181,8 +181,8 @@ importers:
         specifier: 2.1.1
         version: 2.1.1
       '@module-federation/vite':
-        specifier: 'catalog:'
-        version: https://pkg.pr.new/@module-federation/vite@925(typescript@6.0.3)(vite@8.1.0(@types/node@25.3.3)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(terser@5.49.0)(tsx@4.21.0)(yaml@2.8.2))
+        specifier: link:../../../mf-vite
+        version: link:../../../mf-vite
       ember-source:
         specifier: 7.0.0
         version: 7.0.0(@glimmer/component@2.1.1)
@@ -242,8 +242,8 @@ importers:
         specifier: 2.1.1
         version: 2.1.1
       '@module-federation/vite':
-        specifier: 'catalog:'
-        version: https://pkg.pr.new/@module-federation/vite@925(typescript@6.0.3)(vite@8.1.0(@types/node@25.3.3)(esbuild@0.27.7)(jiti@2.6.1)(sass@1.97.3)(terser@5.49.0)(tsx@4.21.0)(yaml@2.8.2))
+        specifier: link:../../../mf-vite
+        version: link:../../../mf-vite
       ember-source:
         specifier: 7.0.0
         version: 7.0.0(@glimmer/component@2.1.1)

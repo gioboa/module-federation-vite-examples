@@ -1,10 +1,10 @@
 import { federation } from "@module-federation/vite";
 import { ember } from "@nullvoxpopuli/ember-vite";
 import { defineConfig } from "vite";
-import { dependencies } from "./package.json" with { type: "json" };
 
 export default defineConfig({
   plugins: [
+    ember(),
     federation({
       dts: false,
       dev: { disableDynamicRemoteTypeHints: true },
@@ -14,14 +14,8 @@ export default defineConfig({
         "./remote-app": "./app/federated-app.ts",
       },
       remotes: {},
-      shared: {
-        "@glimmer/component": {
-          requiredVersion: dependencies["@glimmer/component"],
-          singleton: true,
-        },
-      },
+      shared: {},
     }),
-    ember(),
   ],
   server: { port: 3000 },
   build: { target: "chrome89" },
