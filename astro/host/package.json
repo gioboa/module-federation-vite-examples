@@ -1,0 +1,17 @@
+{
+  "name": "astro-host",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --port 4173",
+    "build": "astro build",
+    "preview": "astro preview --port 4173"
+  },
+  "dependencies": {
+    "astro": "^5.18.0"
+  },
+  "devDependencies": {
+    "@module-federation/astro": "0.0.1"
+  }
+}

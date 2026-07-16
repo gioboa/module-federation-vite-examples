@@ -10,6 +10,7 @@ A collection of Module Federation examples built with Vite, used to test new [@m
 | ---------------------- | --------------- | ----------------- | --------------------------- |
 | [Alpine](./alpine)     | `alpine-host`   | `alpine-remote`   | Alpine.js                   |
 | [Angular](./angular)   | `angular-host`  | `angular-remote`  | Angular                     |
+| [Astro](./astro)       | `astro-host`    | `astro-remote`    | Astro 5                     |
 | [Ember](./ember)       | `ember-host`    | `ember-remote`    | Ember 7                     |
 | [Lit](./lit)           | `lit-host`      | `lit-remote`      | Lit                         |
 | [Nuxt](./nuxt)         | `nuxt-host`     | `nuxt-remote`     | Nuxt 4                      |
@@ -37,6 +38,7 @@ pnpm install
 # Run examples
 pnpm alpine:dev
 pnpm angular:dev
+pnpm astro:dev
 pnpm ember:dev
 pnpm lit:dev
 pnpm react:dev

@@ -1,4 +1,4 @@
-# React host and remote
+# Astro host and remote
 
 ## Getting started
 

@@ -1,0 +1,17 @@
+{
+  "name": "astro-remote",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --port 4174",
+    "build": "astro build",
+    "preview": "astro preview --port 4174"
+  },
+  "dependencies": {
+    "astro": "^5.18.0"
+  },
+  "devDependencies": {
+    "@module-federation/astro": "0.0.1"
+  }
+}

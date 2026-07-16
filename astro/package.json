@@ -1,0 +1,9 @@
+{
+  "name": "astro",
+  "description": "Module Federation Vite + Astro is now possible",
+  "scripts": {
+    "dev": "pnpm --filter astro-* dev",
+    "build": "pnpm --filter astro-* build",
+    "preview": "pnpm --filter astro-* preview"
+  }
+}
