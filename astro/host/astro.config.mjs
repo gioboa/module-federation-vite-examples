@@ -24,9 +24,37 @@ const federationWithoutPageBootstrap = {
   },
 };
 
+const federationIntegration = {
+  name: "astro-host-federation",
+  hooks: {
+    "astro:config:setup": (context) => {
+      if (context.command === "dev") {
+        // The federation Vite plugin is not compatible with Astro 7's dev
+        // Environment API yet, so use the local remote source during dev.
+        context.updateConfig({
+          vite: {
+            resolve: {
+              alias: [
+                {
+                  find: "astro_remote/components/RemoteCard",
+                  replacement: new URL("../remote/src/components/RemoteCard.astro", import.meta.url)
+                    .pathname,
+                },
+              ],
+            },
+          },
+        });
+        return;
+      }
+
+      return federationWithoutPageBootstrap.hooks["astro:config:setup"](context);
+    },
+  },
+};
+
 export default defineConfig({
   devToolbar: { enabled: false },
   server: { port: 4173, strictPort: true },
   preview: { port: 4173, strictPort: true },
-  integrations: [federationWithoutPageBootstrap],
+  integrations: [federationIntegration],
 });

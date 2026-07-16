@@ -47,7 +47,7 @@ jobs:
         run: pnpm install --no-frozen-lockfile --prefer-offline
 
       - name: Test vite 7
-        if: ${{ !contains(fromJSON('["ember","nuxt","react","tanstack","vinext"]'), matrix.framework) }}
+        if: ${{ !contains(fromJSON('["astro","ember","nuxt","react","tanstack","vinext"]'), matrix.framework) }}
         uses: ./.github/actions/test-vite
         with:
           vite-version: "7"
