@@ -2,6 +2,8 @@ import Component from '@glimmer/component'
 import { tracked } from '@glimmer/tracking'
 import { on } from '@ember/modifier'
 import type Owner from '@ember/owner'
+import { registerDestructor } from '@ember/destroyable'
+import { scheduleOnce } from '@ember/runloop'
 
 class HostCounter extends Component {
   @tracked count = 0
@@ -16,13 +18,25 @@ class HostCounter extends Component {
 }
 
 export default class Application extends Component {
-  @tracked remoteLoaded = false
-
   constructor(owner: Owner, args: object) {
     super(owner, args)
-    void import('remote/remote-app').then(() => {
-      this.remoteLoaded = true
+    let cleanup: (() => void) | undefined
+
+    scheduleOnce('afterRender', this, () => {
+      let element = document.querySelector<HTMLElement>('#remote-root')
+      if (!element) return
+
+      element.replaceChildren()
+
+      void import('remote/mount').then(async (remote) => {
+        await remote.__mf_remote_pending
+        return remote.default(element)
+      }).then((destroy) => {
+        cleanup = destroy
+      })
     })
+
+    registerDestructor(this, () => cleanup?.())
   }
 
   <template>
@@ -38,10 +52,5 @@ export default class Application extends Component {
       </div>
     </div>
 
-    {{#if this.remoteLoaded}}
-      <federated-remote-app></federated-remote-app>
-    {{else}}
-      loading...
-    {{/if}}
   </template>
 }

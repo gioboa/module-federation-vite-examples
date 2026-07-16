@@ -1,9 +1,11 @@
 import { federation } from "@module-federation/vite";
-import { ember } from "@nullvoxpopuli/ember-vite";
+import { ember } from "@embroider/vite";
+import babel from "@rollup/plugin-babel";
 import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [
+    babel({ babelHelpers: "runtime", extensions: [".js", ".ts", ".gjs", ".gts"] }),
     ember(),
     federation({
       dts: false,
@@ -11,7 +13,7 @@ export default defineConfig({
       filename: "remoteEntry.js",
       name: "remote",
       exposes: {
-        "./remote-app": "./app/federated-app.ts",
+        "./mount": "./app/mount.ts",
       },
       remotes: {},
       shared: {},

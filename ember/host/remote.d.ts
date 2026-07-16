@@ -1,3 +1,5 @@
-declare module "remote/remote-app" {
-  export default class FederatedRemoteApp extends HTMLElement {}
+declare module "remote/mount" {
+  export const __mf_remote_pending: Promise<unknown>;
+  const mount: (element: HTMLElement) => Promise<() => void>;
+  export default mount;
 }
