@@ -12,4 +12,4 @@ allowBuilds:
   vue-demi: true
 
 catalog:
-  "@module-federation/vite": "https://pkg.pr.new/@module-federation/vite@151a56d"
+  "@module-federation/vite": "https://pkg.pr.new/@module-federation/vite@f403a8e"
