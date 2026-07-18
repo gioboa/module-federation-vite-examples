@@ -28,9 +28,10 @@ const federationIntegration = {
   name: "astro-host-federation",
   hooks: {
     "astro:config:setup": (context) => {
-      if (context.command === "dev") {
+      if (context.command === "dev" || context.command === "build") {
         // The federation Vite plugin is not compatible with Astro 7's dev
-        // Environment API yet, so use the local remote source during dev.
+        // Environment API or static SSR prerendering yet, so use the local
+        // remote source in those modes.
         context.updateConfig({
           vite: {
             resolve: {
