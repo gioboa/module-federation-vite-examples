@@ -27,7 +27,7 @@ export default function CounterSsr() {
     >
       <div style={{ marginTop: "10px", fontSize: "21px" }}>Remote SSR component</div>
       <p style={{ margin: "10px 0 16px", fontSize: "12px", color: "rgba(255, 255, 255, 0.82)" }}>
-        Rendered by remote after client hydration.
+        Rendered by remote before client hydration.
       </p>
       {hydrated && (
         <button

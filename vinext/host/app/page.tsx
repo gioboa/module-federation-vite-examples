@@ -2,6 +2,7 @@ import Counter from "./counter";
 import "./host.css";
 import HostSsrComponent from "./host-ssr-component";
 import { RemoteCounter, RemoteWidget } from "./remote-component";
+import RemoteFragment from "./remote-fragment";
 
 export default function Home() {
   return (
@@ -35,8 +36,8 @@ export default function Home() {
         </div>
       </div>
       <HostSsrComponent />
-      <RemoteWidget />
-      <RemoteCounter />
+      <RemoteWidget fallback={<RemoteFragment name="widget" />} />
+      <RemoteCounter fallback={<RemoteFragment name="counter" />} />
     </div>
   );
 }

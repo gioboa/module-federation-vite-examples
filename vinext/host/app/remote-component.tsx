@@ -28,7 +28,7 @@ const remoteLoads: Record<string, Promise<RemoteModule>> | null =
       };
 
 function createRemoteComponent(label: string) {
-  return function RemoteComponent() {
+  return function RemoteComponent({ fallback }: { fallback?: React.ReactNode }) {
     const [state, setState] = react.useState<RemoteComponentState>({
       error: null,
       RemoteComponent: null,
@@ -84,8 +84,10 @@ function createRemoteComponent(label: string) {
       );
     }
 
+    // Until the federated module arrives, show the server-rendered fragment
+    // fetched from the remote so its static markup is part of the SSR output.
     const { RemoteComponent } = state;
-    return RemoteComponent ? <RemoteComponent /> : null;
+    return RemoteComponent ? <RemoteComponent /> : (fallback ?? null);
   };
 }
 
