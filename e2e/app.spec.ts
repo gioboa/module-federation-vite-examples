@@ -3,7 +3,8 @@ import { expect, test } from "@playwright/test";
 const isSharedState = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("vue");
 const isNuxt = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("nuxt");
 const isSvelteKit = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("svelte");
-const isSsrCardsExample = isNuxt || isSvelteKit;
+const isVinext = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("vinext");
+const isSsrCardsExample = isNuxt || isSvelteKit || isVinext;
 const isTanStack = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("tanstack");
 
 const btn = (page: any, name: RegExp) => page.getByRole("button", { name }).first();
@@ -68,7 +69,7 @@ test.describe("standard examples", () => {
 });
 
 test.describe("SSR card examples", () => {
-  test.skip(!isSsrCardsExample, "nuxt/sveltekit only");
+  test.skip(!isSsrCardsExample, "nuxt/sveltekit/vinext only");
 
   test("host app and remote components should load", async ({ page }) => {
     await page.goto("/");

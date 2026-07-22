@@ -1,0 +1,157 @@
+diff --git a/dist/client/index.d.ts b/dist/client/index.d.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..45f10ed459a2240e19b695437bdd6389d1827d52
+--- /dev/null
++++ b/dist/client/index.d.ts
+@@ -0,0 +1 @@
++export { getVinextReact } from "./react-instance.js";
+diff --git a/dist/client/index.js b/dist/client/index.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..45f10ed459a2240e19b695437bdd6389d1827d52
+--- /dev/null
++++ b/dist/client/index.js
+@@ -0,0 +1 @@
++export { getVinextReact } from "./react-instance.js";
+diff --git a/dist/client/react-instance-bootstrap.d.ts b/dist/client/react-instance-bootstrap.d.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..cb0ff5c3b541f646105198ee23ac0fc3d805023e
+--- /dev/null
++++ b/dist/client/react-instance-bootstrap.d.ts
+@@ -0,0 +1 @@
++export {};
+diff --git a/dist/client/react-instance-bootstrap.js b/dist/client/react-instance-bootstrap.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..ce8ed2c00d1dd7a6fa7bc9a6dfe7b8dc7dd38177
+--- /dev/null
++++ b/dist/client/react-instance-bootstrap.js
+@@ -0,0 +1,4 @@
++"use client";
++import * as React from "react";
++import { getVinextReact } from "./react-instance.js";
++getVinextReact(React);
+diff --git a/dist/client/react-instance.d.ts b/dist/client/react-instance.d.ts
+new file mode 100644
+index 0000000000000000000000000000000000000000..de06e888e6dc05675ac848a50eebfe1820fbe75e
+--- /dev/null
++++ b/dist/client/react-instance.d.ts
+@@ -0,0 +1,5 @@
++/**
++* Return the React instance registered by the vinext browser entry.
++*/
++declare function getVinextReact(reactInstance: typeof import("react")): typeof import("react");
++export { getVinextReact };
+diff --git a/dist/client/react-instance.js b/dist/client/react-instance.js
+new file mode 100644
+index 0000000000000000000000000000000000000000..633c8f5cafad2c74bcc3164ada8c3a1c324fa788
+--- /dev/null
++++ b/dist/client/react-instance.js
+@@ -0,0 +1,20 @@
++//#region src/client/react-instance.ts
++const VINEXT_CLIENT_REACT = Symbol.for("vinext.client.react");
++/**
++* Return the React instance registered by the vinext browser entry.
++*
++* Module Federation remotes can call this with their local React namespace to
++* reuse the host instance. The first browser registration wins so evaluating
++* another copy of this module (for example after HMR) cannot replace it.
++* Server and RSC environments always keep their condition-specific React
++* instance local.
++*/
++function getVinextReact(reactInstance) {
++	if (typeof window === "undefined") return reactInstance;
++	const registeredReact = Reflect.get(globalThis, VINEXT_CLIENT_REACT);
++	if (registeredReact !== void 0) return registeredReact;
++	Reflect.set(globalThis, VINEXT_CLIENT_REACT, reactInstance);
++	return reactInstance;
++}
++//#endregion
++export { getVinextReact };
+diff --git a/dist/entries/app-browser-entry.js b/dist/entries/app-browser-entry.js
+index d34069eb3ab5bfd10319ea0940bc617595a0bb6e..72e90b28dbf8384ae8d17c60c398391cf7e920ca 100644
+--- a/dist/entries/app-browser-entry.js
++++ b/dist/entries/app-browser-entry.js
+@@ -14,9 +14,11 @@ function generateBrowserEntry(routes = [], routeManifest = null, pagesPrefetchRo
+ 	fallback: []
+ }) {
+ 	const entryPath = resolveRuntimeEntryModule("app-browser-entry");
++	const reactInstanceBootstrapPath = resolveClientRuntimeModule("react-instance-bootstrap");
+ 	const navigationRuntimePath = resolveClientRuntimeModule("navigation-runtime");
+ 	const prefetchRoutes = toLinkPrefetchRoutes(routes);
+-	return `import { registerNavigationRuntimeBootstrap } from ${JSON.stringify(navigationRuntimePath)};
++	return `import ${JSON.stringify(reactInstanceBootstrapPath)};
++import { registerNavigationRuntimeBootstrap } from ${JSON.stringify(navigationRuntimePath)};
+ 
+ window.__VINEXT_LINK_PREFETCH_ROUTES__ = ${JSON.stringify(prefetchRoutes)};
+ // Pages route manifest for hybrid ownership decisions. In a hybrid
+diff --git a/dist/entries/pages-client-entry.js b/dist/entries/pages-client-entry.js
+index 74cda07ac3c37de82157583f6592f834af80fa8d..1bf4c015886c973527989c94cdd16df92382bd8f 100644
+--- a/dist/entries/pages-client-entry.js
++++ b/dist/entries/pages-client-entry.js
+@@ -3,6 +3,7 @@ import { findFileWithExts } from "../routing/file-matcher.js";
+ import { patternToNextFormat } from "../routing/route-validation.js";
+ import { apiRouter, pagesRouter } from "../routing/pages-router.js";
+ import { hasExportedName } from "../build/report.js";
++import { resolveClientRuntimeModule } from "./runtime-entry-module.js";
+ import { readFile } from "node:fs/promises";
+ //#region src/entries/pages-client-entry.ts
+ /**
+@@ -61,7 +62,9 @@ async function generateClientEntry(pagesDir, nextConfig, fileMatcher, options =
+ 	const userInstrumentationImport = instrumentationClientPath ? `import ${JSON.stringify(toSlash(instrumentationClientPath))};\n` : "";
+ 	const reactPreambleImport = options.reactPreamble === false ? "" : "import \"@vitejs/plugin-react/preamble\";\n";
+ 	const reactStrictModeEnabled = nextConfig.reactStrictMode === true;
+-	return `${userInstrumentationImport}${reactPreambleImport}
++	const reactInstanceBootstrapPath = resolveClientRuntimeModule("react-instance-bootstrap");
++	return `import ${JSON.stringify(reactInstanceBootstrapPath)};
++${userInstrumentationImport}${reactPreambleImport}
+ import "vinext/instrumentation-client";
+ import React from "react";
+ import { hydrateRoot } from "react-dom/client";
+diff --git a/dist/index.js b/dist/index.js
+index 021430e4874f26910571c04ff1c7b6c46836c233..09eb03bb8a17f8a933369ff40c03182f5e8c1365 100644
+--- a/dist/index.js
++++ b/dist/index.js
+@@ -1192,6 +1192,7 @@ function vinext(options = {}) {
+ 					"vinext/head-state": path.join(shimsDir, "head-state"),
+ 					"vinext/i18n-state": path.join(shimsDir, "i18n-state"),
+ 					"vinext/i18n-context": path.join(shimsDir, "i18n-context"),
++					"vinext/client": path.resolve(__dirname, "client", "index"),
+ 					"vinext/cache": path.resolve(__dirname, "cache"),
+ 					"vinext/instrumentation": path.resolve(__dirname, "server", "instrumentation"),
+ 					"vinext/instrumentation-client": path.resolve(__dirname, "client", "instrumentation-client"),
+diff --git a/dist/server/pages-dev-hydration.js b/dist/server/pages-dev-hydration.js
+index 669e29706339552b7a40d17650162bc2736f0576..04bd69aa1afe8d2595078385c6f94f43091ed998 100644
+--- a/dist/server/pages-dev-hydration.js
++++ b/dist/server/pages-dev-hydration.js
+@@ -1,7 +1,9 @@
+ import { createNonceAttribute } from "./html.js";
++import { resolveClientRuntimeModule } from "../entries/runtime-entry-module.js";
+ //#region src/server/pages-dev-hydration.ts
+ function createPagesDevHydrationScript(options) {
+ 	const nonceAttr = createNonceAttribute(options.scriptNonce);
++	const reactInstanceBootstrapPath = resolveClientRuntimeModule("react-instance-bootstrap");
+ 	const initializeRouter = options.forceRouterReady ? "_initializePagesRouterReadyFromNextData(nextData, true);" : "_initializePagesRouterReadyFromNextData(nextData);";
+ 	const pagePatterns = options.setPagePatternsFromNextData ? "window.__VINEXT_PAGE_PATTERNS__ = [nextData.page];" : "";
+ 	const pageProps = options.normalizePageProps === false ? "const pageProps = rawPageProps ?? {};" : "const pageProps = rawPageProps && typeof rawPageProps === \"object\" ? rawPageProps : {};";
+@@ -24,6 +26,7 @@ function createPagesDevHydrationScript(options) {
+   `;
+ 	return `
+ <script type="module"${nonceAttr}>
++import ${JSON.stringify(reactInstanceBootstrapPath)};
+ import "vinext/instrumentation-client";
+ import React from "react";
+ import { hydrateRoot } from "react-dom/client";
+diff --git a/package.json b/package.json
+index 56d81800090b54a1994d4a08c9973bc95686fa1b..d2a0e196d78c5bac2b82b7067d67cd5c0c969d41 100644
+--- a/package.json
++++ b/package.json
+@@ -21,6 +21,10 @@
+       "types": "./dist/index.d.ts",
+       "import": "./dist/index.js"
+     },
++    "./client": {
++      "types": "./dist/client/index.d.ts",
++      "import": "./dist/client/index.js"
++    },
+     "./cache": {
+       "types": "./dist/cache.d.ts",
+       "import": "./dist/cache.js"

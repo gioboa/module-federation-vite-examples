@@ -1,6 +1,7 @@
 import Counter from "./counter";
 import "./host.css";
-import RemoteApp from "./remote-app";
+import HostSsrComponent from "./host-ssr-component";
+import { RemoteCounter, RemoteWidget } from "./remote-component";
 
 export default function Home() {
   return (
@@ -8,6 +9,8 @@ export default function Home() {
       style={{
         margin: "20px",
         display: "flex",
+        flexWrap: "wrap",
+        alignItems: "flex-start",
         gap: "20px",
       }}
     >
@@ -31,7 +34,9 @@ export default function Home() {
           <Counter />
         </div>
       </div>
-      <RemoteApp />
+      <HostSsrComponent />
+      <RemoteWidget />
+      <RemoteCounter />
     </div>
   );
 }

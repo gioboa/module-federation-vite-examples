@@ -39,3 +39,4 @@ tanstack/**/.mf
 tanstack/**/dist
 tanstack/**/node_modules/.ssr-cache
 .astro
+.next

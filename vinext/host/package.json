@@ -15,19 +15,19 @@
   "dependencies": {
     "@module-federation/vite": "catalog:",
     "next": "16.1.6",
-    "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react": "19.2.8",
+    "react-dom": "19.2.8"
   },
   "devDependencies": {
     "@types/node": "20",
     "@types/react": "19",
     "@types/react-dom": "19",
-    "@vitejs/plugin-rsc": "0.5.21",
+    "@vitejs/plugin-rsc": "0.5.29",
     "eslint": "9",
     "eslint-config-next": "16.1.6",
-    "react-server-dom-webpack": "19.2.4",
+    "react-server-dom-webpack": "19.2.8",
     "typescript": "5",
-    "vinext": "0.0.25",
+    "vinext": "1.0.0-beta.3",
     "vite": "8.1.0"
   }
 }

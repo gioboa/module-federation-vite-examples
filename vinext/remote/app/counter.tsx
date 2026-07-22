@@ -1,7 +1,7 @@
 "use client";
 
 import * as LocalReact from "react";
-import { getVinextReact } from "./nextApp";
+import { getVinextReact } from "vinext/client";
 
 const { useState } = getVinextReact(LocalReact);
 
