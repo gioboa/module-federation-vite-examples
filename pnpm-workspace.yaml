@@ -12,7 +12,7 @@ allowBuilds:
   vue-demi: true
 
 catalog:
-  "@module-federation/vite": "https://pkg.pr.new/@module-federation/vite@971"
+  "@module-federation/vite": "https://pkg.pr.new/@module-federation/vite@7d5c44a"
 
 patchedDependencies:
   vinext@1.0.0-beta.3: patches/vinext@1.0.0-beta.3.patch
