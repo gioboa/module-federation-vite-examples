@@ -1,9 +1,9 @@
 {
   "name": "vinext",
-  "description": "Module Federation Vite + vinext is now possible",
+  "description": "Module Federation Vite + vinext SSR with shared React and isolated islands",
   "scripts": {
-    "dev": "pnpm --filter vinext-* dev:vinext",
-    "build": "pnpm --filter vinext-* build:vinext",
-    "preview": "pnpm build && pnpm --filter vinext-* preview:vinext"
+    "dev": "pnpm --filter 'vinext-*' --parallel dev",
+    "build": "pnpm --filter 'vinext-*' build",
+    "preview": "pnpm build && pnpm --filter 'vinext-*' --parallel preview"
   }
 }

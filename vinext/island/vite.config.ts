@@ -3,22 +3,22 @@ import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
 const mf = {
-  name: "remote",
+  name: "island",
   filename: "remoteEntry.js",
   exposes: {
-    "./Widget": "./src/widget.tsx",
     "./Counter": "./src/counter.tsx",
   },
-  remotes: {},
-  shared: {
-    react: { singleton: true },
-    "react-dom": { singleton: true },
-  },
+  experiments: { ssrMode: "ISLAND" as const },
+  // This remote deliberately owns React 18 while the vinext host uses React 19.
+  shared: {},
   dts: false,
 };
 
 export default defineConfig({
   plugins: [federation(mf), react()],
+  resolve: {
+    dedupe: ["react", "react-dom"],
+  },
   build: {
     target: "chrome89",
     modulePreload: false,
@@ -26,12 +26,12 @@ export default defineConfig({
   },
   server: {
     cors: true,
-    origin: "http://localhost:4174",
+    origin: "http://localhost:4175",
   },
   preview: {
     cors: true,
     host: "127.0.0.1",
-    port: 4174,
+    port: 4175,
     strictPort: true,
   },
 });

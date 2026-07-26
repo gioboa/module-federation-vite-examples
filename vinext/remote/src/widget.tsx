@@ -1,9 +1,6 @@
 "use client";
 
-import * as LocalReact from "react";
-import { getVinextReact } from "vinext/client";
-
-const { useEffect, useState } = getVinextReact(LocalReact);
+import { useEffect, useState } from "react";
 
 export default function Widget() {
   const [count, setCount] = useState(0);

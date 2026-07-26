@@ -1,21 +1,21 @@
 {
-  "name": "vinext-remote",
+  "name": "vinext-island",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite dev --port 4174",
+    "dev": "vite dev --port 4175",
     "build": "vite build",
-    "preview": "vite preview --port 4174"
+    "preview": "vite preview --port 4175"
   },
   "dependencies": {
-    "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react": "18.3.1",
+    "react-dom": "18.3.1"
   },
   "devDependencies": {
     "@module-federation/vite": "catalog:",
-    "@types/react": "19",
-    "@types/react-dom": "19",
+    "@types/react": "18.3.28",
+    "@types/react-dom": "18.3.7",
     "@vitejs/plugin-react": "5.1.4",
     "typescript": "5",
     "vite": "8.1.0"
