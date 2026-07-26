@@ -8,6 +8,7 @@ export default defineConfig({
       dts: true,
       dev: { disableDynamicRemoteTypeHints: true, remoteHmr: true },
       name: "host",
+      hostInitInjectLocation: "entry",
       remotes: {
         remote: {
           type: "module",
@@ -16,14 +17,19 @@ export default defineConfig({
           entryGlobalName: "remote",
           shareScope: "default",
         },
+        island: {
+          type: "module",
+          name: "island",
+          entry: `http://localhost:4175/remoteEntry.js`,
+          entryGlobalName: "island",
+          shareScope: "default",
+        },
       },
       exposes: {},
       filename: "remoteEntry.js",
       shared: {
         react: { singleton: true },
-        "react/": { singleton: true },
         "react-dom": { singleton: true },
-        "react-dom/": { singleton: true },
       },
     }),
     vinext(),

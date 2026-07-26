@@ -1,11 +1,8 @@
 "use client";
 
-import * as LocalReact from "react";
-import { getVinextReact } from "vinext/client";
+import { useEffect, useState } from "react";
 
-const { useEffect, useState } = getVinextReact(LocalReact);
-
-export default function CounterSsr() {
+export default function RemoteCounter() {
   const [count, setCount] = useState(0);
   const [hydrated, setHydrated] = useState(false);
 

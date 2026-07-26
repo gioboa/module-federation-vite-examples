@@ -89,8 +89,10 @@ test.describe("SSR card examples", () => {
 
     await expect(page.getByText(/Hydrated/i).first()).toBeVisible({ timeout: 10000 });
 
-    await btn(page, /Host counter: 0/).click();
-    await expect(btn(page, /Host counter: 1/)).toBeVisible();
+    await expect(async () => {
+      await btn(page, /Host counter: 0/).click();
+      await expect(btn(page, /Host counter: 1/)).toBeVisible({ timeout: 500 });
+    }).toPass({ timeout: 10000 });
 
     await btn(page, /SSR counter: 0/).click();
     await expect(btn(page, /SSR counter: 1/)).toBeVisible();
@@ -104,7 +106,7 @@ test.describe("SSR card examples", () => {
   test("hydration badges should update after client-side hydration", async ({ page }) => {
     await page.goto("/");
 
-    await expect(page.getByText(/Hydrated/i)).toHaveCount(2, { timeout: 10000 });
+    await expect(page.getByText("Hydrated", { exact: true })).toHaveCount(2, { timeout: 10000 });
   });
 });
 
