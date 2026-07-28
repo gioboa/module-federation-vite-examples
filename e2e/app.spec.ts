@@ -108,6 +108,18 @@ test.describe("SSR card examples", () => {
 
     await expect(page.getByText("Hydrated", { exact: true })).toHaveCount(2, { timeout: 10000 });
   });
+
+  test("isolated React island should be server-rendered and interactive", async ({ page }) => {
+    test.skip(!isVinext, "vinext only");
+    await page.goto("/");
+
+    await expect(page.getByText("React 18 SSR island")).toBeVisible({ timeout: 10000 });
+    await expect(btn(page, /Island counter: 18/)).toBeVisible({ timeout: 10000 });
+    await expect(async () => {
+      await btn(page, /Island counter: 18/).click();
+      await expect(btn(page, /Island counter: 19/)).toBeVisible({ timeout: 500 });
+    }).toPass({ timeout: 10000 });
+  });
 });
 
 test.describe("tanstack", () => {

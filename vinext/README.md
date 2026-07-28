@@ -19,6 +19,6 @@ Open http://localhost:4173/ in your browser.
 
 The shared remote runs at http://localhost:4174 and the React 18 island at http://localhost:4175.
 
-The exposed module keeps its original default component and receives an additional `__mf_island` property. The host calls `renderToHtml()` from a server component, passes that HTML to a client component, and then calls `hydrate()` in an effect. The island contract is generic; Vinext is only the SSR host used by this example.
+The exposed module keeps its original default component and receives an additional `__mf_island` property. A host opts into the plugin-provided React adapter with `import Counter from "island/Counter?mf-island"`; the generated server component renders the island HTML and its generated client boundary hydrates it. Importing `island/Counter` without the query remains unchanged, so a consumer can use `__mf_island` directly and implement a different adapter. The island contract is generic; Vinext is only the SSR host used by this example.
 
 ![Vinext SSR host with a shared remote and an isolated React island](docs/screenshot.png)
