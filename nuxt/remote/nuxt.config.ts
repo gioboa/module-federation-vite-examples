@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   // Only the host needs a DevTools bridge while both apps run together.
   // Enabling it in both apps makes them compete for port 24678.
   devtools: { enabled: false },
-  modules: ["@pinia/nuxt", "@module-federation/nuxt"],
+  modules: ["@module-federation/nuxt"],
 
   experimental: {
     buildCache: false,
@@ -18,11 +18,6 @@ export default defineNuxtConfig({
     config: {
       name: "remote",
       filename: "remoteEntry.js",
-      exposes: {
-        "./remote-app": "./app/app.vue",
-        "./Widget": "./app/components/Widget.vue",
-        "./Counter": "./app/components/CounterSsr.vue",
-      },
       remotes: {},
       manifest: true,
       shared: {
