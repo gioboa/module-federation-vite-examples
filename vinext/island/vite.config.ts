@@ -15,11 +15,24 @@ const mf = {
 };
 
 export default defineConfig({
+  builder: {},
   plugins: [federation(mf), react()],
+  environments: {
+    client: {
+      build: { outDir: "dist/client" },
+    },
+    ssr: {
+      build: {
+        outDir: "dist/server",
+        ssr: "./src/counter.tsx",
+      },
+    },
+  },
   resolve: {
     dedupe: ["react", "react-dom"],
   },
   build: {
+    outDir: "dist/client",
     target: "chrome89",
     modulePreload: false,
     minify: false,

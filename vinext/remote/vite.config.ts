@@ -18,8 +18,21 @@ const mf = {
 };
 
 export default defineConfig({
+  builder: {},
   plugins: [federation(mf), react()],
+  environments: {
+    client: {
+      build: { outDir: "dist/client" },
+    },
+    ssr: {
+      build: {
+        outDir: "dist/server",
+        ssr: "./src/widget.tsx",
+      },
+    },
+  },
   build: {
+    outDir: "dist/client",
     target: "chrome89",
     modulePreload: false,
     minify: false,
