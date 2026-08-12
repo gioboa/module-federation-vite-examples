@@ -21,7 +21,7 @@
     "@vitejs/plugin-rsc": "0.5.29",
     "react-server-dom-webpack": "19.2.8",
     "typescript": "5",
-    "vinext": "1.0.0-beta.3",
+    "vinext": "1.0.0-beta.5",
     "vite": "8.1.0"
   }
 }
