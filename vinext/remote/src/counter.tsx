@@ -1,6 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import * as React from "react";
+import { getVinextReact } from "vinext/client";
+
+const { useEffect, useState } = getVinextReact(React);
 
 export default function RemoteCounter() {
   const [count, setCount] = useState(0);

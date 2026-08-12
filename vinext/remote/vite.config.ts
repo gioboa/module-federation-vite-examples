@@ -12,7 +12,9 @@ const mf = {
   remotes: {},
   shared: {
     react: { singleton: true },
+    "react/": { singleton: true },
     "react-dom": { singleton: true },
+    "react-dom/": { singleton: true },
   },
   dts: false,
 };

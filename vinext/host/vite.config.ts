@@ -29,7 +29,9 @@ export default defineConfig({
       filename: "remoteEntry.js",
       shared: {
         react: { singleton: true },
+        "react/": { singleton: true },
         "react-dom": { singleton: true },
+        "react-dom/": { singleton: true },
       },
     }),
     vinext(),
