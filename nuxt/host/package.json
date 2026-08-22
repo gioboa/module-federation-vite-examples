@@ -9,9 +9,9 @@
     "preview": "nuxt preview --port 4173"
   },
   "dependencies": {
-    "@module-federation/nuxt": "0.0.1",
+    "@module-federation/nuxt": "0.1.0",
     "@pinia/nuxt": "0.11.3",
-    "nuxt": "4.4.8",
+    "nuxt": "4.5.2",
     "pinia": "3.0.4",
     "vue": "3.5.29",
     "vue-router": "4.6.4"
