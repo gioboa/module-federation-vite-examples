@@ -12,4 +12,13 @@ allowBuilds:
   vue-demi: true
 
 catalog:
-  "@module-federation/vite": "https://pkg.pr.new/@module-federation/vite@b8ab405"
+  "@module-federation/vite": "https://pkg.pr.new/@module-federation/vite@5fb22b9"
+
+minimumReleaseAgeExclude:
+  - "@module-federation/dts-plugin@2.9.0"
+  - "@module-federation/error-codes@2.9.0"
+  - "@module-federation/managers@2.9.0"
+  - "@module-federation/runtime-core@2.9.0"
+  - "@module-federation/runtime@2.9.0"
+  - "@module-federation/sdk@2.9.0"
+  - "@module-federation/third-party-dts-extractor@2.9.0"
