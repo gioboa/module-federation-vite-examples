@@ -5,7 +5,7 @@
     "predev": "svelte-kit sync || echo ''",
     "dev": "vite dev --port 4174",
     "build": "vite build",
-    "preview": "npx serve build -l 4174 --cors",
+    "preview": "vite preview --outDir build --port 4174",
     "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
   },
