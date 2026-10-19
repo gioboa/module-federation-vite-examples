@@ -7,6 +7,7 @@
     "preview": "vite preview --port 4174"
   },
   "dependencies": {
+    "@module-federation/runtime": "2.9.2",
     "react": "19.0.0",
     "react-dom": "19.0.0",
     "tanstack-shared": "workspace:*"

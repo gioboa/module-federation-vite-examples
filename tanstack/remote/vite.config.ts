@@ -3,6 +3,20 @@ import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 
 export default defineConfig({
+  builder: {},
+  // The ssr environment makes the plugin emit remoteEntry.ssr.js next to the
+  // browser remoteEntry.js, which SSR hosts load through ssrEntryLoader.
+  environments: {
+    client: {
+      build: { outDir: "dist/client" },
+    },
+    ssr: {
+      build: {
+        outDir: "dist/server",
+        ssr: "./src/components/Widget.tsx",
+      },
+    },
+  },
   plugins: [
     federation({
       dts: false,
@@ -21,6 +35,7 @@ export default defineConfig({
     react(),
   ],
   build: {
+    outDir: "dist/client",
     target: "chrome89",
   },
   server: {
