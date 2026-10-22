@@ -1,5 +1,5 @@
-.host .card,
-.remote-card {
+.host .card {
+  background: #3178c6;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
   border-radius: 5px;
   margin: 20px;
@@ -10,28 +10,21 @@
   float: left;
 }
 
-.host .card {
-  background: #3178c6;
-}
-.remote-card {
-  background: #1f2124;
-}
-
-.title {
+.host .title {
   margin-top: 10px;
   font-size: 25px;
 }
 
-svg {
+.host svg {
   width: 100px;
   height: 100px;
 }
 
-path {
+.host path {
   fill: #f6b352;
 }
 
-button {
+.host button {
   border: 0;
   margin-top: 10px;
   background: rgb(246, 179, 82);

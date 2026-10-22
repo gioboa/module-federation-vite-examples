@@ -11,7 +11,7 @@ const ENV: Config = {
   rootURL: "/",
   locationType: "history",
   EmberENV: {},
-  APP: { rootElement: "#host-root" },
+  APP: {},
 };
 
 export default ENV;
