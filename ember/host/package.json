@@ -16,6 +16,8 @@
     "@embroider/router": "3.0.6",
     "@glimmer/component": "2.1.1",
     "@module-federation/vite": "catalog:",
+    "ember-async-data": "2.0.1",
+    "ember-modifier": "4.3.0",
     "ember-source": "7.0.0",
     "ember-strict-application-resolver": "0.1.1"
   },

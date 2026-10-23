@@ -1,20 +1,8 @@
-import Application from "./app";
-import environment from "./config";
+import { renderComponent } from "@ember/renderer";
+import RemoteApp from "./components/remote-app.gts";
 
 export default async function mount(element: HTMLElement) {
-  const rootId = element.id || "ember-federated-remote";
-  element.id = rootId;
+  const { destroy } = renderComponent(RemoteApp, { into: element });
 
-  const application = Application.create({
-    ...environment.APP,
-    autoboot: false,
-    rootElement: element,
-  });
-
-  await application.visit("/", {
-    location: "none",
-    rootElement: `#${rootId}`,
-  });
-
-  return () => application.destroy();
+  return destroy;
 }
