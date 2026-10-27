@@ -60,6 +60,16 @@ falls back to fetching the browser entry in Node and the route fails with
 `Failed to load Node.js entry for remote`. `manifest: true` is optional; the loader also finds the
 entry by the `.ssr.js` convention.
 
+### Remote CSS during SSR
+
+The SSR remote entry carries no CSS, and in the browser a remote's CSS is only injected once its
+JS loads, so a stylesheet imported the usual way (`import "./Widget.css"`) arrives at hydration.
+`remote/src/components/Widget.tsx` instead imports its stylesheet with `?url` and renders
+`<link rel="stylesheet" precedence="default">` itself. React 19 hoists that link into the server
+`<head>` and, on the client, suspends until it has loaded, so there is no unstyled flash. The URL
+must point at the remote origin: `experimental.renderBuiltUrl` in `remote/vite.config.ts`
+does that for built CSS, and `server.origin` does it in dev.
+
 ### Dev mode
 
 ```bash

@@ -1,0 +1,15 @@
+.remote-widget {
+  background: #1f2124;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+  color: white;
+  margin: 20px;
+  padding: 20px;
+  text-align: center;
+  width: 250px;
+}
+
+.remote-widget__title {
+  margin-top: 10px;
+  font-size: 21px;
+}

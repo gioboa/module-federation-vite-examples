@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { useTheme } from "tanstack-shared";
+// ?url keeps the CSS out of the JS graph: the component renders the <link> itself, so the
+// stylesheet is in the server HTML instead of being injected when the remote JS loads.
+import widgetCss from "./Widget.css?url";
 
 function CloudIcon() {
   return (
@@ -25,22 +28,13 @@ export default function Widget() {
   const theme = useTheme();
 
   return (
-    <div
-      style={{
-        background: "#1f2124",
-        boxShadow: "0 0 20px rgba(0, 0, 0, 0.4)",
-        borderRadius: 5,
-        color: "white",
-        margin: 20,
-        padding: 20,
-        textAlign: "center",
-        width: 250,
-      }}
-    >
+    <div className="remote-widget">
+      {/* React 19 hoists this into <head> during SSR and suspends on it on the client. */}
+      <link rel="stylesheet" href={widgetCss} precedence="default" />
       <div className="icon">
         <CloudIcon />
       </div>
-      <div style={{ marginTop: 10, fontSize: 21 }}>I'm the remote app</div>
+      <div className="remote-widget__title">I'm the remote app</div>
       <p style={{ margin: "10px 0 16px", fontSize: 12, color: "#c9cdd3" }}>
         Theme from host context: <strong>{theme.label}</strong> ({theme.primaryColour})
       </p>

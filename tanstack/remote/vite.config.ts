@@ -34,6 +34,13 @@ export default defineConfig({
     }),
     react(),
   ],
+  // The Widget's stylesheet <link> is rendered inside host pages, so its URL must point at the
+  // remote origin. Dev gets that from server.origin.
+  experimental: {
+    renderBuiltUrl(filename) {
+      if (filename.endsWith(".css")) return `http://localhost:4174/${filename}`;
+    },
+  },
   build: {
     outDir: "dist/client",
     target: "chrome89",

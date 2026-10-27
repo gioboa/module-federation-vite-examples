@@ -150,6 +150,20 @@ test.describe("tanstack", () => {
     await expect(page.getByText("Remote counter").first()).toBeVisible({ timeout: 10000 });
   });
 
+  test("remote stylesheet should be in the server HTML", async ({ request, page }) => {
+    // The remote Widget renders its own <link precedence>, which React hoists into <head>.
+    const html = await (await request.get("/")).text();
+    expect(html.slice(0, html.indexOf("</head>"))).toMatch(
+      /<link rel="stylesheet" href="http:\/\/localhost:4174\/[^"]*Widget[^"]*\.css"/
+    );
+
+    await page.goto("/");
+    await expect(page.locator(".remote-widget").first()).toHaveCSS(
+      "background-color",
+      "rgb(31, 33, 36)"
+    );
+  });
+
   test("remote counter should be interactive after hydration", async ({ page }) => {
     await page.goto("/");
 
