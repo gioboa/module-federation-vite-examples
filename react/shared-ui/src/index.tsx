@@ -1,4 +1,9 @@
+import { useTranslation } from "react-i18next";
+
+export { registerTranslations, translationsBackend } from "./i18n";
+
 export function SharedBadge({ label }: { label: string }) {
+  const { t } = useTranslation("ds");
   return (
     <span
       style={{
@@ -18,7 +23,7 @@ export function SharedBadge({ label }: { label: string }) {
         backdropFilter: "blur(8px)",
       }}
     >
-      {label}
+      {t("badge", { label })}
     </span>
   );
 }

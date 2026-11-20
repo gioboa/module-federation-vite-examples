@@ -1,0 +1,6 @@
+{
+  "title": "Sono l'app host",
+  "counter": "Contatore host: {{count}}",
+  "badge": "ui condivisa dall'host",
+  "language": "Lingua"
+}

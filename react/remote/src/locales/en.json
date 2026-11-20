@@ -1,0 +1,5 @@
+{
+  "title": "I'm the remote app",
+  "counter": "Remote counter: {{count}}",
+  "badge": "shared ui from remote"
+}

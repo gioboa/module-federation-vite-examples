@@ -1,5 +1,6 @@
 import { SharedBadge } from "@mf-vite-example/shared-ui";
 import { lazy, Suspense, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { of, tap } from "rxjs";
 import "./App.css";
 import Counter from "./components/Counter";
@@ -11,6 +12,8 @@ const Remote = lazy(
 );
 
 export default () => {
+  const { t, i18n } = useTranslation("host");
+
   useEffect(() => {
     logRemoteImportDocs();
 
@@ -39,9 +42,22 @@ export default () => {
               />
             </svg>
           </div>
-          <div className="title">I'm the host app</div>
+          <div className="title">{t("title")}</div>
           <Counter />
-          <SharedBadge label="shared ui from host" />
+          <SharedBadge label={t("badge")} />
+          <div style={{ marginTop: "12px" }}>
+            {t("language")}:{" "}
+            {["en", "it"].map((lng) => (
+              <button
+                key={lng}
+                aria-pressed={i18n.resolvedLanguage === lng}
+                onClick={() => i18n.changeLanguage(lng)}
+                style={{ marginLeft: "4px" }}
+              >
+                {lng.toUpperCase()}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 

@@ -1,0 +1,5 @@
+{
+  "title": "Sono l'app remote",
+  "counter": "Contatore remote: {{count}}",
+  "badge": "ui condivisa dal remote"
+}

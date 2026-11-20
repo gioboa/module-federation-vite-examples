@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default () => {
   const [count, setCount] = useState<number>(0);
+  const { t } = useTranslation("host");
 
   return (
     <button
@@ -16,7 +18,7 @@ export default () => {
       }}
       onClick={() => setCount(count + 1)}
     >
-      Host counter: {count}
+      {t("counter", { count })}
     </button>
   );
 };

@@ -1,0 +1,6 @@
+{
+  "title": "I'm the host app",
+  "counter": "Host counter: {{count}}",
+  "badge": "shared ui from host",
+  "language": "Language"
+}

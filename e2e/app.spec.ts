@@ -6,6 +6,7 @@ const isSvelteKit = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("svelte");
 const isVinext = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("vinext");
 const isSsrCardsExample = isNuxt || isSvelteKit || isVinext;
 const isTanStack = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("tanstack");
+const isReact = /\breact:/.test(process.env.PLAYWRIGHT_TEST_COMMAND ?? "pnpm react:preview");
 
 const btn = (page: any, name: RegExp) => page.getByRole("button", { name }).first();
 
@@ -65,6 +66,43 @@ test.describe("standard examples", () => {
       // Host still at 2
       await expect(btn(page, /Host counter: 2/)).toBeVisible();
     }
+  });
+});
+
+test.describe("react i18n", () => {
+  test.skip(!isReact, "react only");
+
+  test("host, remote and design system share one i18next instance", async ({ page }) => {
+    await page.goto("/");
+
+    await expect(page.getByText("I'm the host app")).toBeVisible({ timeout: 10000 });
+    await expect(page.getByText("I'm the remote app")).toBeVisible({ timeout: 10000 });
+    await expect(page.getByText("Design system · shared ui from host")).toBeVisible();
+    await expect(page.getByText("Design system · shared ui from remote")).toBeVisible();
+
+    // i18next is a federated singleton: the remote reuses the host's instance.
+    expect(
+      await page.evaluate(() => {
+        const w = window as any;
+        return Boolean(w.__hostI18n) && w.__hostI18n === w.__remoteI18n;
+      })
+    ).toBe(true);
+
+    await btn(page, /Remote counter: 0/).click();
+    await page.getByRole("button", { name: "IT", exact: true }).click();
+
+    // One changeLanguage call in the host re-renders every owner's namespace.
+    await expect(page.getByText("Sono l'app host")).toBeVisible();
+    await expect(page.getByText("Sono l'app remote")).toBeVisible();
+    await expect(page.getByText("Sistema di design · ui condivisa dall'host")).toBeVisible();
+    await expect(page.getByText("Sistema di design · ui condivisa dal remote")).toBeVisible();
+    // State survives: the remote re-rendered, it did not remount.
+    await expect(btn(page, /Contatore remote: 1/)).toBeVisible();
+    await expect(btn(page, /Contatore host: 0/)).toBeVisible();
+
+    await page.getByRole("button", { name: "EN", exact: true }).click();
+    await expect(page.getByText("I'm the remote app")).toBeVisible();
+    await expect(page.getByText("Design system · shared ui from remote")).toBeVisible();
   });
 });
 

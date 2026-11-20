@@ -1,8 +1,11 @@
 import { useEffect } from "react";
 import { SharedBadge } from "@mf-vite-example/shared-ui";
+import { useTranslation } from "react-i18next";
 import Counter from "./components/Counter";
+import "./i18n";
 
 export default () => {
+  const { t } = useTranslation("remote");
   useEffect(() => {
     console.log("Remote useEffect");
   }, []);
@@ -37,9 +40,9 @@ export default () => {
           />
         </svg>
       </div>
-      <div style={{ marginTop: "10px", fontSize: "25px" }}>I'm the remote app</div>
+      <div style={{ marginTop: "10px", fontSize: "25px" }}>{t("title")}</div>
       <Counter />
-      <SharedBadge label="shared ui from remote" />
+      <SharedBadge label={t("badge")} />
     </div>
   );
 };
