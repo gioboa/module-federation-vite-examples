@@ -1,0 +1,9 @@
+{
+  "name": "react-router",
+  "description": "Module Federation Vite + React Router framework mode with SSR",
+  "scripts": {
+    "dev": "pnpm --filter rr-* dev",
+    "build": "pnpm --filter rr-* build",
+    "preview": "pnpm --filter rr-* preview"
+  }
+}

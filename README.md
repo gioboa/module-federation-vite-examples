@@ -6,21 +6,22 @@ A collection of Module Federation examples built with Vite, used to test new [@m
 
 ## Examples
 
-| Example                | Host            | Remote            | Framework                   |
-| ---------------------- | --------------- | ----------------- | --------------------------- |
-| [Alpine](./alpine)     | `alpine-host`   | `alpine-remote`   | Alpine.js                   |
-| [Angular](./angular)   | `angular-host`  | `angular-remote`  | Angular                     |
-| [Astro](./astro)       | `astro-host`    | `astro-remote`    | Astro 7                     |
-| [Ember](./ember)       | `ember-host`    | `ember-remote`    | Ember 7                     |
-| [Lit](./lit)           | `lit-host`      | `lit-remote`      | Lit                         |
-| [Nuxt](./nuxt)         | `nuxt-host`     | `nuxt-remote`     | Nuxt 4                      |
-| [Preact](./preact)     | `preact-host`   | `preact-remote`   | Preact 10                   |
-| [React](./react)       | `react-host`    | `react-remote`    | React 19                    |
-| [Solid](./solid)       | `solid-host`    | `solid-remote`    | Solid                       |
-| [Svelte](./svelte)     | `svelte-host`   | `svelte-remote`   | Svelte 5                    |
-| [TanStack](./tanstack) | `tanstack-host` | `tanstack-remote` | TanStack Router + React 19  |
-| [Vinext](./vinext)     | `vinext-host`   | `vinext-remote`   | Vinext + Next 16 + React 19 |
-| [Vue](./vue)           | `vue-host`      | `vue-remote`      | Vue 3                       |
+| Example                        | Host            | Remote            | Framework                       |
+| ------------------------------ | --------------- | ----------------- | ------------------------------- |
+| [Alpine](./alpine)             | `alpine-host`   | `alpine-remote`   | Alpine.js                       |
+| [Angular](./angular)           | `angular-host`  | `angular-remote`  | Angular                         |
+| [Astro](./astro)               | `astro-host`    | `astro-remote`    | Astro 7                         |
+| [Ember](./ember)               | `ember-host`    | `ember-remote`    | Ember 7                         |
+| [Lit](./lit)                   | `lit-host`      | `lit-remote`      | Lit                             |
+| [Nuxt](./nuxt)                 | `nuxt-host`     | `nuxt-remote`     | Nuxt 4                          |
+| [Preact](./preact)             | `preact-host`   | `preact-remote`   | Preact 10                       |
+| [React](./react)               | `react-host`    | `react-remote`    | React 19                        |
+| [React Router](./react-router) | `rr-host`       | `rr-remote`       | React Router 8 (SSR) + React 19 |
+| [Solid](./solid)               | `solid-host`    | `solid-remote`    | Solid                           |
+| [Svelte](./svelte)             | `svelte-host`   | `svelte-remote`   | Svelte 5                        |
+| [TanStack](./tanstack)         | `tanstack-host` | `tanstack-remote` | TanStack Router + React 19      |
+| [Vinext](./vinext)             | `vinext-host`   | `vinext-remote`   | Vinext + Next 16 + React 19     |
+| [Vue](./vue)                   | `vue-host`      | `vue-remote`      | Vue 3                           |
 
 Each example follows a **host/remote** architecture with shared dependencies.
 
@@ -42,6 +43,7 @@ pnpm astro:dev
 pnpm ember:dev
 pnpm lit:dev
 pnpm react:dev
+pnpm react-router:dev
 pnpm preact:dev
 pnpm solid:dev
 pnpm vue:dev

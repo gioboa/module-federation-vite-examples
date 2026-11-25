@@ -1,0 +1,27 @@
+{
+  "name": "rr-host",
+  "type": "module",
+  "scripts": {
+    "dev": "react-router dev --port 4173",
+    "build": "react-router build",
+    "preview": "PORT=4173 react-router-serve ./build/server/index.js"
+  },
+  "dependencies": {
+    "@module-federation/runtime": "2.9.2",
+    "@module-federation/vite": "catalog:",
+    "@react-router/node": "8.5.3",
+    "@react-router/serve": "8.5.3",
+    "isbot": "5.1.31",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-router": "8.5.3"
+  },
+  "devDependencies": {
+    "@react-router/dev": "8.5.3",
+    "@types/node": "25.3.3",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "typescript": "5.9.3",
+    "vite": "8.1.0"
+  }
+}

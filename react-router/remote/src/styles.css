@@ -1,0 +1,11 @@
+.remote-note {
+  border: 2px dashed rebeccapurple;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+}
+
+.remote-note-title {
+  font-weight: bold;
+  color: rebeccapurple;
+}

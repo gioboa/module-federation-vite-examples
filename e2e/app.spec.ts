@@ -6,11 +6,16 @@ const isSvelteKit = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("svelte");
 const isVinext = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("vinext");
 const isSsrCardsExample = isNuxt || isSvelteKit || isVinext;
 const isTanStack = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("tanstack");
+const isReactRouter = process.env.PLAYWRIGHT_TEST_COMMAND?.includes("react-router");
+const isPreview = process.env.PLAYWRIGHT_TEST_COMMAND?.includes(":preview");
 
 const btn = (page: any, name: RegExp) => page.getByRole("button", { name }).first();
 
 test.describe("standard examples", () => {
-  test.skip(isTanStack || isSsrCardsExample, "SSR examples have specific coverage");
+  test.skip(
+    isTanStack || isSsrCardsExample || isReactRouter,
+    "SSR examples have specific coverage"
+  );
 
   test("host app and remote component should load and counters should work", async ({ page }) => {
     await page.goto("/");
@@ -186,5 +191,41 @@ test.describe("tanstack", () => {
 
     // Badge transitions from 'ssr' (server-rendered) to 'hydrated' once JS loads.
     await expect(page.getByText("hydrated").first()).toBeVisible({ timeout: 10000 });
+  });
+});
+
+test.describe("react-router", () => {
+  test.skip(!isReactRouter, "react-router only");
+
+  test("remote is server rendered and hydrates", async ({ page, request }) => {
+    const html = await (await request.get("/")).text();
+    expect(html).toContain("I&#x27;m the remote app");
+
+    await page.goto("/");
+    // The remote hydrates once its JS has loaded: retry the click until it lands.
+    await expect(async () => {
+      await btn(page, /Remote counter: \d+/).click();
+      await expect(btn(page, /Remote counter: [1-9]/)).toBeVisible({ timeout: 1000 });
+    }).toPass({ timeout: 15000 });
+    await btn(page, /Host counter: 0/).click();
+    await expect(btn(page, /Host counter: 1/)).toBeVisible();
+  });
+
+  test("host renders the remote stylesheet during SSR", async ({ browser, page }) => {
+    // The dev manifest lists no CSS: Vite injects styles from JS in dev.
+    test.skip(!isPreview, "build only");
+
+    // Without JS, only the server HTML can have styled the remote.
+    const context = await browser.newContext({ javaScriptEnabled: false });
+    const noJs = await context.newPage();
+    await noJs.goto("http://localhost:4173/");
+    await expect(noJs.locator(".remote-note-title")).toHaveCSS("color", "rgb(102, 51, 153)");
+    await context.close();
+
+    // With JS, the remote entry finds the host's <link> and does not add another.
+    await page.goto("/");
+    await expect(btn(page, /Remote counter: 0/)).toBeVisible();
+    await page.waitForLoadState("networkidle");
+    await expect(page.locator('link[rel="stylesheet"][href*="localhost:4174"]')).toHaveCount(1);
   });
 });

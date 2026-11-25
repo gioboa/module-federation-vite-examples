@@ -1,6 +1,6 @@
 packages:
-  - "{alpine,angular,astro,ember,lit,nuxt,preact,react,solid,svelte,tanstack,vinext,vue}"
-  - "{alpine,angular,astro,ember,lit,nuxt,preact,react,solid,svelte,tanstack,vinext,vue}/*"
+  - "{alpine,angular,astro,ember,lit,nuxt,preact,react,react-router,solid,svelte,tanstack,vinext,vue}"
+  - "{alpine,angular,astro,ember,lit,nuxt,preact,react,react-router,solid,svelte,tanstack,vinext,vue}/*"
 
 allowBuilds:
   "@parcel/watcher": true
@@ -12,4 +12,4 @@ allowBuilds:
   vue-demi: true
 
 catalog:
-  "@module-federation/vite": "https://pkg.pr.new/@module-federation/vite@1585"
+  "@module-federation/vite": "https://pkg.pr.new/@module-federation/vite@69ab59e"
