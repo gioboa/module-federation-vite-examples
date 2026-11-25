@@ -1,5 +1,5 @@
 {
-  "name": "react-router",
+  "name": "rr",
   "description": "Module Federation Vite + React Router framework mode with SSR",
   "scripts": {
     "dev": "pnpm --filter rr-* dev",
