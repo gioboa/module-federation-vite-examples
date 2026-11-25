@@ -219,7 +219,7 @@ test.describe("react-router", () => {
     const context = await browser.newContext({ javaScriptEnabled: false });
     const noJs = await context.newPage();
     await noJs.goto("http://localhost:4173/");
-    await expect(noJs.locator(".remote-note-title")).toHaveCSS("color", "rgb(102, 51, 153)");
+    await expect(noJs.locator(".remote-card")).toHaveCSS("background-color", "rgb(31, 33, 36)");
     await context.close();
 
     // With JS, the remote entry finds the host's <link> and does not add another.

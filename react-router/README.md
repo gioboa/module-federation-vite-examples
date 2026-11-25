@@ -1,18 +1,20 @@
 # React Router host and remote
 
-React Router framework mode (SSR) host that loads a remote at runtime. No federation plugin on
-the host: it creates its own Module Federation instances, one per side.
-
 ## Getting started
 
-From this directory:
+From this directory execute:
 
-```bash
-pnpm build
-pnpm preview
-```
+- pnpm build
+- pnpm preview
 
-Open http://localhost:4173/
+Open your browser at http://localhost:4173/ to see the amazing result
+
+![screenshot](docs/screenshot.png)
+
+## Overview
+
+React Router framework mode (SSR) host that loads a remote at runtime. No federation plugin on
+the host: it creates its own Module Federation instances, one per side.
 
 ## Remote CSS during SSR, owned by the host
 
